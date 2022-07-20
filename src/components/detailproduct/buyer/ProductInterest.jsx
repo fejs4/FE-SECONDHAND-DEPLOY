@@ -15,23 +15,25 @@ const ProductInterest = ({data,handleOpen}) => {
     const wishlistAmbil = useSelector(state => state.wishlist.wishlist)
     const getId = Object.keys(wishlistAmbil).length !== 0 && wishlistAmbil.map((data) => data.productId)
     const onWishlist = getId ? getId.includes(Number(id)) : ''
-
+    
     const dataUser = useSelector(state => state.auth.userProfile)
     const detailProduct = useSelector(state => state.product.detailProduct)
 
     const handleWishlist = async () => {
-        if (dataUser.id !== detailProduct.user.id) {
-            if (love === false) {
-                setLove(true)
-                const data =  {
-                    product_id : id
+        if (Object.keys(dataUser).length !== 0) {
+            if (dataUser.id !== detailProduct.user.id) {
+                if (love === false) {
+                    setLove(true)
+                    const data =  {
+                        product_id : id
+                    }
+                    dispatch(postWishlist(data))
+                }else{
+                    setLove(false)
+                    const detailWishlist = wishlistAmbil.filter(item => item.productId === Number(id))
+                    const dataId = detailWishlist[0].id
+                    dispatch(deleteWishlist(dataId))
                 }
-                dispatch(postWishlist(data))
-            }else{
-                setLove(false)
-                const detailWishlist = wishlistAmbil.filter(item => item.productId === Number(id))
-                const dataId = detailWishlist[0].id
-                dispatch(deleteWishlist(dataId))
             }
         }
     }
@@ -41,11 +43,13 @@ const ProductInterest = ({data,handleOpen}) => {
     const tawarID = Object.keys(dataTawar).length !== 0 ? dataTawar.filter(item => item.productId === Number(id)) : ''
 
     React.useEffect(()=>{
-        if (onWishlist) {
-            setLove(true)
+        if (Object.keys(dataUser).length !== 0) {
+            if (onWishlist) {
+                setLove(true)
+            }
+            dispatch(fetchWishlist())
+            dispatch(fetchTawarBuyer())
         }
-        dispatch(fetchWishlist())
-        dispatch(fetchTawarBuyer())
     },[dispatch,onWishlist,dataTawar,tawarID])
 
  
