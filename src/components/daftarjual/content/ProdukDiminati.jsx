@@ -26,11 +26,11 @@ const ProdukDiminati = () => {
 
   const handleDelete = (e, id) => {
     e.preventDefault()
-    dispatch(deleteTawar(id)).then((res) => if (res.payload.success) {
+    dispatch(deleteTawar(id)).then((res) => {if (res.payload.success) {
       setTimeout(() => {
         window.location.reload()
       }, 2000);
-    })
+    }})
   }
 
   React.useEffect(() => {
