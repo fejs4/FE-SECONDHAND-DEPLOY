@@ -1,14 +1,11 @@
 import React from "react";
-import { InputAdornment, Modal, OutlinedInput } from '@mui/material'
 import ArrowBackSharpIcon from "@mui/icons-material/ArrowBackSharp";
 import Toolbar from "@mui/material/Toolbar";
 import { Button, Grid } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
 import { Link } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteWishlist, fetchWishlist } from "../../redux/wishlist";
-import ModalDeleteWishlist from "../detailproduct/buyer/ModalDeleteWishlist";
 
 const style = {
   position: 'absolute',
