@@ -29,7 +29,7 @@ const ProdukDiminati = () => {
     dispatch(deleteTawar(id))
     setTimeout(() => {
       window.location.reload()
-    }, 1000);
+    }, 2000);
   }
 
   React.useEffect(() => {
