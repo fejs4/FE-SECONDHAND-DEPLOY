@@ -12,7 +12,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProductDetail, publishProduct, setLoading } from '../../../redux/product'
 import ModalBuyer from '../buyer/ModalBuyer'
-import { setMessage } from '../../../redux/tawar'
+import { setMessage, setSuccess } from '../../../redux/tawar'
 import DetailProductLoading from '../../loading/DetailProductLoading'
 
 const ProductDetails = ({ status }) => {
@@ -40,6 +40,7 @@ const ProductDetails = ({ status }) => {
   const handlePost = () => {
     if (dataUser.id === detailProduct.user.id) {
       dispatch(setMessage('Tidak dapat melakukan penawaran pada produk sendiri'))
+      dispatch(setSuccess(false))
     }
     setAlert(true)
     setTimeout(() => {
@@ -55,6 +56,7 @@ const ProductDetails = ({ status }) => {
       navigate(`/info-produk/update/${id}`)
     } else {
       dispatch(setMessage('Tidak dapat melakukan edit produk pada produk orang!'))
+      dispatch(setSuccess(false))
       setAlert(true)
       setTimeout(() => {
         setAlert(false)
@@ -74,6 +76,7 @@ const ProductDetails = ({ status }) => {
       }
     } else {
       dispatch(setMessage('Tidak dapat melakukan publish produk pada produk orang!'))
+      dispatch(setSuccess(false))
       setAlert(true)
       setTimeout(() => {
         setAlert(false)
