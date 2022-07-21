@@ -82,6 +82,10 @@ const FormProduct = () => {
                                 setTimeout(() => {
                                     navigate(`/daftar-jual`)
                                 }, 2000);
+                            }else{
+                                setTimeout(() => {
+                                    navigate(`/daftar-jual`)
+                                }, 2000);
                             }
                         }
                     )
@@ -90,6 +94,10 @@ const FormProduct = () => {
                     dispatch(postProducts(product)).then(
                         (res) => {
                             if (res.payload.success) {
+                                setTimeout(() => {
+                                    navigate(`/daftar-jual`)
+                                }, 2000);
+                            }else{
                                 setTimeout(() => {
                                     navigate(`/daftar-jual`)
                                 }, 2000);
