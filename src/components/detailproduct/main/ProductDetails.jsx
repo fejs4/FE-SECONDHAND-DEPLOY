@@ -39,8 +39,8 @@ const ProductDetails = ({ status }) => {
   const loading = useSelector(state => state.product.loading)
   const handlePost = () => {
     if (dataUser.id === detailProduct.user.id) {
-      dispatch(setMessage('Tidak dapat melakukan penawaran pada produk sendiri'))
       dispatch(setSuccess(false))
+      dispatch(setMessage('Tidak dapat melakukan penawaran pada produk sendiri'))
     }
     setAlert(true)
     setTimeout(() => {
@@ -55,8 +55,8 @@ const ProductDetails = ({ status }) => {
     if (dataUser.id === detailProduct.user.id) {
       navigate(`/info-produk/update/${id}`)
     } else {
-      dispatch(setMessage('Tidak dapat melakukan edit produk pada produk orang!'))
       dispatch(setSuccess(false))
+      dispatch(setMessage('Tidak dapat melakukan edit produk pada produk orang!'))
       setAlert(true)
       setTimeout(() => {
         setAlert(false)
@@ -75,8 +75,8 @@ const ProductDetails = ({ status }) => {
         navigate('/daftar-jual')
       }
     } else {
-      dispatch(setMessage('Tidak dapat melakukan publish produk pada produk orang!'))
       dispatch(setSuccess(false))
+      dispatch(setMessage('Tidak dapat melakukan publish produk pada produk orang!'))
       setAlert(true)
       setTimeout(() => {
         setAlert(false)

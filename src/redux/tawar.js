@@ -140,7 +140,6 @@ const tawarSlice = createSlice({
             return { ...state, error: null }
         },
         [fetchDetailTawar.fulfilled]: (state, action) => {
-            console.log()
             return { ...state, detailTawar: action.payload.data }
         },
         [fetchDetailTawar.rejected]: (state, action) => {
