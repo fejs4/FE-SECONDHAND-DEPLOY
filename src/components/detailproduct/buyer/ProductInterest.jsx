@@ -20,7 +20,7 @@ const ProductInterest = ({data,handleOpen}) => {
     const detailProduct = useSelector(state => state.product.detailProduct)
 
     const handleWishlist = async () => {
-        if (dataUser.id !== detailProduct.user.id) {
+        if (Object.keys(dataUser).length !== 0) {
             if (love === false) {
                 setLove(true)
                 const data =  {
