@@ -53,7 +53,7 @@ const ProductInterest = ({data,handleOpen}) => {
             setLove(false)
         }
         dispatch(fetchWishlist())
-    },[dispatch,onWishlist,wishlistAmbil])
+    },[dispatch,onWishlist])
 
  
     return (
