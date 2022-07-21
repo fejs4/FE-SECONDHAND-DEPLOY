@@ -69,7 +69,7 @@ const notifSlice = createSlice({
             return { ...state, loading: true, error: null, }
         },
         [deleteNotif.fulfilled]: (state, action) => {
-            console.log(action.payload)
+            return { ...state}
         },
         [deleteNotif.rejected]: (state, action) => {
             return { ...state, message:action.payload.message, success:action.payload.success  }

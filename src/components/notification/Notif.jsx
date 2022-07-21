@@ -27,7 +27,7 @@ const Notif = () => {
 
     const handleDelete = (e, id) => {
         e.preventDefault()
-        dispatch(deleteNotif(id))
+        dispatch(deleteNotif(id)).then(res => res.payload.success && dispatch(fetchNotif()))
     }
 
     React.useEffect(() => {

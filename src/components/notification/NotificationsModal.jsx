@@ -28,15 +28,14 @@ const Notifications = () => {
 
     const handleDelete = (e, id) => {
         e.preventDefault()
-        console.log(id)
-        dispatch(deleteNotif(id)).then((res) => console.log(res))
+        dispatch(deleteNotif(id)).then((res) => res.payload.success && dispatch(fetchNotif()))
     }
 
     React.useEffect(() => {
         if (Object.keys(profileUser).length !== 0) {
             dispatch(fetchNotif())
         }
-    }, [dispatch, notification,profileUser])
+    }, [dispatch, profileUser])
 
 
     return (

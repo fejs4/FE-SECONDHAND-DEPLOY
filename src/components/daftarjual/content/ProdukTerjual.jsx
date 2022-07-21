@@ -16,10 +16,8 @@ const ProdukTerjual = ({ setSuccess }) => {
     e.preventDefault()
     dispatch(deleteProduct(id)).then((data) => {
       if (data.payload.success) {
+        dispatch(fetchProductSold())
         setSuccess(true)
-        setTimeout(() => {
-          window.location.reload()
-        }, 1000)
       }
     })
   }

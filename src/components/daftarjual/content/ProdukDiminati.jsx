@@ -28,11 +28,12 @@ const ProdukDiminati = ({setSuccess}) => {
     e.preventDefault()
     dispatch(deleteTawar(id)).then((data) =>{
       if (data.payload.success) {
+        dispatch(fetchTawarSeller())
         setSuccess(true)
         setTimeout(() => {
           dispatch(setMessage(''))
-          window.location.reload()  
-        }, 2000);
+          dispatch(setLoading(false))
+        }, 1500);
       }
     })
   }

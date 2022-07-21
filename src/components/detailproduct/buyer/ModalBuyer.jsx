@@ -3,7 +3,7 @@ import React from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { postTawar, setMessage } from '../../../redux/tawar';
+import { fetchTawarBuyer, postTawar, setMessage } from '../../../redux/tawar';
 import { setMessageUser, setSuccessUser } from '../../../redux/users';
 import { setMessageAuth, setSuccessAuth } from '../../../redux/auth';
 const style = {
@@ -39,6 +39,7 @@ const ModalBuyer = ({ data, open, handleClose, handlePost }) => {
                     }
                     try {
                         dispatch(postTawar(data)).then((data) => {
+                            data.payload.success && dispatch(fetchTawarBuyer())
                             handlePost()
                             setTimeout(() => {
                                 dispatch(setMessage(''))

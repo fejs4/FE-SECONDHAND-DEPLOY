@@ -25,10 +25,11 @@ const ListProductJual = ({ setSuccess }) => {
         e.preventDefault()
         dispatch(deleteProduct(id)).then((data) => {
             if (data.payload.success) {
+                dispatch(fetchProductsUser())
                 setSuccess(true)
                 setTimeout(() => {
-                    window.location.reload()
-                }, 1000)
+                    dispatch(setLoading(false))
+                }, 1500);
             }
         })
     }

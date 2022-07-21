@@ -17,7 +17,7 @@ const Wishlist = ({ wishlist,data, setWishlist, handleChange, handleOpen, setSuc
   const wishlistAmbil = useSelector((state) => state.wishlist.wishlist)
 
   const handleDelete = (id) => {
-    dispatch(deleteWishlist(id))
+    dispatch(deleteWishlist(id)).then((res) => res.payload.success && dispatch(fetchWishlist()))
   }
 
   function addZero(i) {
@@ -33,7 +33,7 @@ const Wishlist = ({ wishlist,data, setWishlist, handleChange, handleOpen, setSuc
 
   React.useEffect(() => {
     dispatch(fetchWishlist());
-  }, [handleDelete]);
+  }, [dispatch]);
 
   return (
     <Box width={{ md: "70%", xs: "100%" }} mx={"auto"} mt={3}>
@@ -55,12 +55,13 @@ const Wishlist = ({ wishlist,data, setWishlist, handleChange, handleOpen, setSuc
           sx={{ left: 0, right: 0, top: 0 }}
         >
           {Object.keys(wishlistAmbil).length !== 0
-            ? wishlistAmbil.map((res) => {
+            ? wishlistAmbil.map((res,index) => {
               return (
                 
                 <Box
                   component={"div"}
                   rowGap={2}
+                  key={index}
                   display={"flex"}
                   mt={2}
                   sx={{

@@ -23,7 +23,6 @@ const DataPenawar = () => {
     const handleCloseAgreement = () => { setOpenAgreement(false) }
     const handleCloseStatus = () => { setOpenStatus(false) }
     const handleOpenStatus = () => { setOpenStatus(true) }
-    const handleBack = () => { window.localStorage.removeItem('idTransaksiProduk') }
 
     function addZero(i) {
         if (i < 10) { i = "0" + i }
@@ -75,7 +74,6 @@ const DataPenawar = () => {
             }
             dispatch(createTransaksi(data)).then(data => {
                 if (data.payload.success) {
-                    localStorage.setItem(id, true)
                 }
             })
         } catch (err) {
@@ -111,7 +109,7 @@ const DataPenawar = () => {
                     <Alert variant="filled" severity={success ? "success" : "error"} onClose={() => setAlert(false)}>{message}</Alert>
                 </Stack>
                 <Link to={-1}>
-                    <ArrowBackSharpIcon onClick={handleBack} sx={{
+                    <ArrowBackSharpIcon sx={{
                         display: { md: 'block', xs: 'none' }, borderRadius: '50px', background: 'white'
                         , zIndex: 100, padding: 1, cursor: 'pointer', '&:hover': {
                             opacity: [0.9, 0.8, 0.7],
