@@ -1,107 +1,116 @@
-import { Box, Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from '@mui/material'
+import { Box, Card, CardActionArea, CardContent, CardMedia, Divider, Grid, IconButton, Typography } from '@mui/material'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { deleteProduct, fetchProductsUser, setDetail, setLoading } from '../../../redux/product';
-import CardLoading from '../../loading/CardLoading';
+import CircleIcon from '@mui/icons-material/Circle';
+import { deleteTawar, fetchTawarSeller, setLoading, setMessage } from '../../../redux/tawar';
+import { Link } from 'react-router-dom';
+import TawarLoading from '../../loading/TawarLoading';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
-const ListProductJual = ({ setSuccess }) => {
-    const dispatch = useDispatch()
-    const formatter = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" })
-    const data = useSelector(state => state.product.productUser)
-    const loading = useSelector(state => state.product.loading)
-    const userProfile = useSelector(state => state.auth.userProfile)
-    const navigate = useNavigate()
-    const handleSell = () => {
-        if (Object.keys(userProfile).length !== 0) {
-            userProfile.city ? navigate(`/info-produk`) : navigate(`/info-user/${userProfile.id}`)
-        } else {
-            navigate('/login')
-        }
-    }
+const ProdukDiminati = ({setSuccess}) => {
+  const formatter = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" })
+  const dispatch = useDispatch()
+  const dataTawar = useSelector(state => state.tawar.tawarSeller)
+  const loading = useSelector(state => state.tawar.loading)
 
-    const handleDelete = (e, id) => {
-        e.preventDefault()
-        dispatch(deleteProduct(id)).then((data) => {
-            if (data.payload.success) {
-                setSuccess(true)
-                setTimeout(() => {
-                    window.location.reload()
-                }, 1000)
-            }
-        })
-    }
+  function addZero(i) {
+    if (i < 10) { i = "0" + i }
+    return i;
+  }
 
-    React.useEffect(() => {
-        dispatch(setDetail({}))
-        dispatch(fetchProductsUser())
+  const toDate = (datenow) => {
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    const date = new Date(datenow)
+    return (date.getDate() + " " + months[date.getMonth()] + ", " + addZero(date.getHours()) + ":" + addZero(date.getMinutes()))
+  }
+
+  const handleDelete = (e, id) => {
+    e.preventDefault()
+    dispatch(deleteTawar(id)).then((data) =>{
+      if (data.payload.success) {
+        setSuccess(true)
         setTimeout(() => {
-            dispatch(setLoading(false))
-        }, 1500);
-    }, [dispatch])
+          dispatch(setMessage(''))
+          window.location.reload()  
+        }, 2000);
+      }
+    })
+  }
 
-    return (
-        <>
-            <Grid container rowSpacing={3} columnSpacing={{ xs: 3, sm: 3, md: 3 }} >
-                <Grid item xs={6} sm={6} md={4} >
-                    <Card sx={{ maxWidth: 345, height: data.length !== 0 && data.length !== undefined ? '100%' : '280px' }} onClick={handleSell}>
-                        <CardActionArea sx={{ height: '100%', border: '1px dashed #bbb' }}>
-                            <CardContent >
-                                <Typography gutterBottom variant="h4" textAlign='center' component="div">
-                                    +
-                                </Typography>
-                                <Typography gutterBottom variant="subtitle1" textAlign='center' component="div">
-                                    Tambah Produk
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
+  React.useEffect(() => {
+    dispatch(fetchTawarSeller())
+    setTimeout(() => {
+      dispatch(setLoading(false))
+    }, 1500);
+  }, [dispatch,deleteTawar])
+
+  return (
+    <>
+      {Object.keys(dataTawar).length !== 0 ?
+        loading ? <TawarLoading length={Object.keys(dataTawar).length} /> :
+          dataTawar.map((data,index) => {
+            return (
+              <Link key={index} to={`/info-penawar/${data.id}`} style={{ textDecoration: 'none', color: 'black' }}>
+                <Grid container my={1} mx={1} p={1} sx={{
+                  cursor: 'pointer', '&:hover': {
+                    backgroundColor: '#eee',
+                  }
+                }} >
+                  <Grid item xs={2} textAlign="center">
+                    <IconButton >
+                      <Box component={'img'}
+                        src={`https://be-kel1.herokuapp.com/public/images/${data.product.images[0]}`}
+                        sx={{ width: '48px', height: '48px', borderRadius: '12px', objectFit: 'contain ' }}
+                      />
+                    </IconButton>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Box display={'flex'} flexDirection={'row'}>
+                      <Typography variant="caption" color='text.secondary' component="h2" sx={{ marginRight:1 }}>
+                        Penawaran Produk 
+                      </Typography>
+                      <Typography variant="caption" color='text.secondary' component="h2" sx={{  color: data.status === 'accepted' ? 'green' : data.status === 'rejected' ? 'red' : 'orange' }}>
+                        {data.status === 'accepted' ? 'Accepted' : data.status === 'rejected' ? 'Rejected' : 'Waiting'}
+                      </Typography>
+                    </Box>
+                    <Typography variant='subtitle1' fontWeight={550} my={0} >
+                      {data.product.name}
+                    </Typography>
+                    <Typography variant='subtitle1' fontWeight={550} my={0} >
+                      {formatter.format(data.product.price)}
+                    </Typography>
+                    <Typography variant='subtitle1' fontWeight={550} my={0} >
+                      Ditawar  {formatter.format(data.price)}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={4} textAlign="end" >
+                    <Typography variant="caption" color='text.secondary' component="h2" >
+                      {toDate(data.createdAt)} <CircleIcon style={{ color: 'red', fontSize: '0.9em', }} />
+                    </Typography>
+                    <IconButton onClick={(e) => handleDelete(e, data.id)} sx={{ display: data.status === 'waiting' ?  'none' : 'unset' }}>
+                      <DeleteOutlineOutlinedIcon sx={{ color: 'red' }} />
+                    </IconButton>
+                  </Grid>
                 </Grid>
-                {!loading ?
-                    Object.keys(data).length !== 0 ?
-                        data.map((items, index) => {
-                            return (
-                                <Grid key={index} item xs={6} sm={6} md={4} >
-                                    <Link to={`/detail-product-seller/${items.id}`} style={{ textDecoration: 'none' }}>
-                                        <Card sx={{ maxWidth: 345 }}>
-                                            <CardActionArea>
-                                                <Typography gutterBottom variant="h6" component="div" sx={{ padding: .5, display: items.publish ? 'none' : 'block', color: 'white', background: 'grey', fontSize: '.8em', position: 'absolute' }}>
-                                                    {items.publish ? '' : 'Unpublish'}
-                                                </Typography>
-                                                <Box onClick={(e) => handleDelete(e, items.id)} sx={{ padding: .3, fontSize: '.8em', background: 'white', position: 'absolute', right: 0, cursor: 'pointer', boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.2)', borderBottomLeftRadius: '16px' }}>
-                                                    <DeleteOutlineOutlinedIcon sx={{ color: 'red' }} />
-                                                </Box>
-                                                <CardMedia
-                                                    component="img"
-                                                    height="140"
-                                                    image={`https://be-kel1.herokuapp.com/public/images/${items.images[0]}`}
-                                                    alt=""
-                                                    sx={{ objectFit: { md: 'cover', sm: 'cover', xs: 'contain' } }}
-                                                />
-                                                <CardContent>
-                                                    <Typography gutterBottom variant="h6" component="div" sx={{ fontSize: { xs: '1.1em', md: '1.2em' } }}>
-                                                        {items.name}
-                                                    </Typography>
-                                                    <Typography variant="body2" color="text.secondary" mb={1} sx={{ fontSize: { xs: '0.9em', md: '1.2em' } }}>
-                                                        {items.category}
-                                                    </Typography>
-                                                    <Typography gutterBottom variant="h6" component="div" sx={{ fontSize: { xs: '1.1em', md: '1.2em' } }}>
-                                                        {formatter.format(items.price)}
-                                                    </Typography>
-                                                </CardContent>
-                                            </CardActionArea>
-                                        </Card>
-                                    </Link>
-                                </Grid>
-                            )
-                        })
-                        : '' :
-                    <CardLoading length={Object.keys(data).length} md={4} />
-                }
-            </Grid>
+                <Divider sx={{ mt: '0 !important' }} />
+              </Link>
+            )
+          })
+        :
+        <>
+          <Box display={'flex'} justifyContent={'center'}>
+            <Box component={'img'} src='/images/nothing.png' width={276} height={194} />
+          </Box>
+          <Box display={'flex'} justifyContent={'center'} >
+            <Typography component='h5' width={'329px'}>
+              Belum ada produkmu yang diminati nih, sabar ya rejeki nggak kemana kok
+            </Typography>
+          </Box>
         </>
-    )
+      }
+
+    </>
+  )
 }
 
-export default ListProductJual
+export default ProdukDiminati

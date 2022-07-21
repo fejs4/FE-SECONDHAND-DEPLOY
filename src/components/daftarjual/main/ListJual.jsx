@@ -24,7 +24,7 @@ const ListJual = ({success, setSuccess}) => {
           <CategoryJualSwiper category={setClickedCategory} clicked={clickedCategory}/>
         </Grid>
         <Grid item xs={12} md={8} xl={9} >
-          {clickedCategory === 'Semua Produk'? <ListProductJual setSuccess={setSuccess}/> : clickedCategory === 'Diminati'? <ProdukDiminati/> : <ProdukTerjual setSuccess={setSuccess}/> }
+          {clickedCategory === 'Semua Produk'? <ListProductJual setSuccess={setSuccess}/> : clickedCategory === 'Diminati'? <ProdukDiminati setSuccess={setSuccess}/> : <ProdukTerjual setSuccess={setSuccess}/> }
         </Grid>
       </Grid>
     </Box>

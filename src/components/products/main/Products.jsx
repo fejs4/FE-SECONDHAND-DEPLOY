@@ -5,7 +5,7 @@ import FloatingButton from '../FloatingButton'
 import ItemCard from '../ItemCard'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
-import { setMessage, setSuccess } from '../../../redux/auth'
+import { setMessageAuth, setSuccessAuth } from '../../../redux/auth'
 import { setMessageUser, setSuccessUser } from '../../../redux/users'
 
 const Products = () => {
@@ -27,8 +27,8 @@ const Products = () => {
       }
 
     } else {
-      dispatch(setMessage('Anda perlu login untuk dapat menjual produk'))
-      dispatch(setSuccess(false))
+      dispatch(setMessageAuth('Anda perlu login untuk dapat menjual produk'))
+      dispatch(setSuccessAuth(false))
       navigate('/login')
     }
   }

@@ -13,7 +13,7 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { authLogin, setMessage, setSuccess, setUserLogin } from '../../redux/auth';
+import { authLogin, setMessageAuth, setSuccessAuth, setUserLogin } from '../../redux/auth';
 
 const Login = () => {
     // Login
@@ -31,8 +31,8 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault()
         if (error.email !== '' || error.password !== '') {
-            dispatch(setSuccess(false))
-            dispatch(setMessage('Gagal login, data belum terpenuhi!'))
+            dispatch(setSuccessAuth(false))
+            dispatch(setMessageAuth('Gagal login, data belum terpenuhi!'))
         } else {
             try {
                 const user = {

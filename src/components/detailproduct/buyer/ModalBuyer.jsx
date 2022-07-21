@@ -3,9 +3,9 @@ import React from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { postTawar } from '../../../redux/tawar';
+import { postTawar, setMessage } from '../../../redux/tawar';
 import { setMessageUser, setSuccessUser } from '../../../redux/users';
-import { setMessage, setSuccess } from '../../../redux/auth';
+import { setMessageAuth, setSuccessAuth } from '../../../redux/auth';
 const style = {
     position: 'absolute',
     top: '50%',
@@ -38,7 +38,12 @@ const ModalBuyer = ({ data, open, handleClose, handlePost }) => {
                         price: price
                     }
                     try {
-                        dispatch(postTawar(data)).then(data => handlePost())
+                        dispatch(postTawar(data)).then((data) => {
+                            handlePost()
+                            setTimeout(() => {
+                                dispatch(setMessage(''))
+                            }, 2000);
+                        })
                     } catch (err) {
                         console.log(err)
                     }
@@ -51,8 +56,8 @@ const ModalBuyer = ({ data, open, handleClose, handlePost }) => {
                 navigate(`/info-user/${dataUser.id}`)
             }
         } else {
-            dispatch(setMessage('Anda perlu login untuk dapat menawar produk'))
-            dispatch(setSuccess(false))
+            dispatch(setMessageAuth('Anda perlu login untuk dapat menawar produk'))
+            dispatch(setSuccessAuth(false))
             navigate('/login')
         }
     }

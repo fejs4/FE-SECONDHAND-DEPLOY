@@ -40,10 +40,10 @@ const authSlice = createSlice({
         setUserProfile: (state, action) => {
             state.userProfile = action.payload
         },
-        setSuccess: (state, action) => {
+        setSuccessAuth: (state, action) => {
             state.success = action.payload
         },
-        setMessage: (state, action) => {
+        setMessageAuth: (state, action) => {
             state.message = action.payload
         },
     },
@@ -75,5 +75,5 @@ const authSlice = createSlice({
     }
 })
 
-export const { setUserLogin, setUserProfile,setSuccess, setMessage } = authSlice.actions;
+export const { setUserLogin, setUserProfile,setSuccessAuth, setMessageAuth } = authSlice.actions;
 export default authSlice.reducer;

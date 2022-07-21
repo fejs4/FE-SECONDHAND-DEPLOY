@@ -37,15 +37,15 @@ const ProductDetails = ({ status }) => {
   const dataUser = useSelector(state => state.auth.userProfile)
   const detailProduct = useSelector(state => state.product.detailProduct)
   const loading = useSelector(state => state.product.loading)
+  
   const handlePost = () => {
     if (dataUser.id === detailProduct.user.id) {
-      dispatch(setSuccess(false))
       dispatch(setMessage('Tidak dapat melakukan penawaran pada produk sendiri'))
     }
     setAlert(true)
     setTimeout(() => {
       setAlert(false)
-    }, 3000);
+    }, 2000);
     setOpen(false)
   }
 
@@ -55,12 +55,12 @@ const ProductDetails = ({ status }) => {
     if (dataUser.id === detailProduct.user.id) {
       navigate(`/info-produk/update/${id}`)
     } else {
-      dispatch(setSuccess(false))
       dispatch(setMessage('Tidak dapat melakukan edit produk pada produk orang!'))
+      dispatch(setSuccess(false))
       setAlert(true)
       setTimeout(() => {
         setAlert(false)
-      }, 3000);
+      }, 2000);
     }
   }
 
@@ -75,12 +75,12 @@ const ProductDetails = ({ status }) => {
         navigate('/daftar-jual')
       }
     } else {
-      dispatch(setSuccess(false))
       dispatch(setMessage('Tidak dapat melakukan publish produk pada produk orang!'))
+      dispatch(setSuccess(false))
       setAlert(true)
       setTimeout(() => {
         setAlert(false)
-      }, 3000);
+      }, 2000);
     }
   }
 

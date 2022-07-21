@@ -12,7 +12,7 @@ import { registerValidation } from '../../validator/validator';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import { useDispatch, useSelector } from 'react-redux';
-import { authRegister, setMessage, setSuccess } from '../../redux/auth';
+import { authRegister, setMessageAuth, setSuccessAuth } from '../../redux/auth';
 
 const Register = () => {
     // Login
@@ -35,8 +35,8 @@ const Register = () => {
     const handleRegister = async (e) => {
         e.preventDefault()
         if (error.email !== '' || error.name !== '' || error.password !== '' ) {
-            dispatch(setSuccess(false))
-            dispatch(setMessage('Gagal register, data belum terpenuhi!'))
+            dispatch(setSuccessAuth(false))
+            dispatch(setMessageAuth('Gagal register, data belum terpenuhi!'))
         }else{
             try {
                 const user = {
@@ -48,7 +48,7 @@ const Register = () => {
                     if (res.payload.success) {
                         setTimeout(() => {
                             navigate('/login')
-                            dispatch(setMessage(''))
+                            dispatch(setMessageAuth(''))
                         }, 1000)
                     }
                 })
