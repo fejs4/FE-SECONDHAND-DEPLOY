@@ -44,6 +44,7 @@ const ProductDetails = ({ status }) => {
     }
     setAlert(true)
     setTimeout(() => {
+      dispatch(setMessage(''))
       setAlert(false)
     }, 2000);
     setOpen(false)
@@ -59,6 +60,7 @@ const ProductDetails = ({ status }) => {
       dispatch(setSuccess(false))
       setAlert(true)
       setTimeout(() => {
+        dispatch(setMessage(''))
         setAlert(false)
       }, 2000);
     }
@@ -79,6 +81,7 @@ const ProductDetails = ({ status }) => {
       dispatch(setSuccess(false))
       setAlert(true)
       setTimeout(() => {
+        dispatch(setMessage(''))
         setAlert(false)
       }, 2000);
     }
