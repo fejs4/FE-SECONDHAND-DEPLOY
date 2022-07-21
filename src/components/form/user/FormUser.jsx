@@ -62,7 +62,7 @@ const FormProduct = () => {
             setAlert(true)
             setTimeout(() => {
                 setAlert(false)
-            }, 3000);
+            }, 2000);
         } else {
             try {
                 const profile = new FormData()

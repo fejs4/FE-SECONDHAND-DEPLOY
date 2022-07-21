@@ -113,7 +113,7 @@ const ProductDetails = ({ status }) => {
               {status === 'buyer' ? <ProductInterest data={data} handlePost={handlePost} handleOpen={handleOpenModal} /> : <ProductInfo data={data} handleEdit={handleEdit} handlePublish={handlePublish} />}
               <SellerInfo data={data} />
               <Box component={'div'} p={4} mt={3} display={{ md: 'none', xs: 'block' }} sx={{ boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.15)', borderRadius: '16px' }}>
-                <DescriptionProduct />
+                <DescriptionProduct data={data}/>
               </Box>
               <Box display={{ xs: 'flex', md: 'none' }} justifyContent={'center'}>
                 {status === 'buyer' ? <PublishBuyer data={data} handleOpen={handleOpenModal} /> : <PublishSeller handlePublish={handlePublish} />}

@@ -7,18 +7,6 @@ import { Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteWishlist, fetchWishlist } from "../../redux/wishlist";
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: { md: '360px', xs: '300px' },
-  height: { md: '438px', xs: '400px' },
-  bgcolor: 'background.paper',
-  boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.15)',
-  borderRadius: '16px',
-  p: '1rem 2rem 2rem 2rem',
-};
 const Wishlist = ({ wishlist,data, setWishlist, handleChange, handleOpen, setSuccess }) => {
   const dispatch = useDispatch();
   const formatter = new Intl.NumberFormat("id-ID", {

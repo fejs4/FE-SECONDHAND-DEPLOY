@@ -62,7 +62,7 @@ const FormProduct = () => {
             setData({ ...data, message: 'Gagal memposting produk, lengkapi data', success: false })
             setTimeout(() => {
                 setAlert(false)
-            }, 3000);
+            }, 2000);
         } else {
             setBackdrop(true)
             try {
@@ -81,7 +81,7 @@ const FormProduct = () => {
                             if (res.payload.success) {
                                 setTimeout(() => {
                                     navigate(`/daftar-jual`)
-                                }, 1000);
+                                }, 2000);
                             }
                         }
                     )
@@ -92,7 +92,7 @@ const FormProduct = () => {
                             if (res.payload.success) {
                                 setTimeout(() => {
                                     navigate(`/daftar-jual`)
-                                }, 1000);
+                                }, 2000);
                             }
                         })
                 }
@@ -127,7 +127,7 @@ const FormProduct = () => {
                             if (res.payload.success) {
                                 setTimeout(() => {
                                     navigate(`/detail-product-seller/${id}`)
-                                }, 1000);
+                                }, 2000);
                             }
                         }
                     )
@@ -137,14 +137,14 @@ const FormProduct = () => {
                         if (data.payload.success) {
                             setTimeout(() => {
                                 navigate(`/detail-product-seller/${data.payload.data.product.productId}`)
-                            }, 1000);
+                            }, 2000);
                         } else {
                             setAlert(true)
                             setData({ ...data, message: data.payload.message, success: false })
                             setBackdrop(false)
                             setTimeout(() => {
                                 setAlert(false)
-                            }, 3000);
+                            }, 2000);
                         }
                         console.log(data)
                     })
