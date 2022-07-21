@@ -14,10 +14,14 @@ const ProdukTerjual = ({ setSuccess }) => {
 
   const handleDelete = (e, id) => {
     e.preventDefault()
-    dispatch(deleteProduct(id)).then(data => data.payload.success ? setSuccess(true) : '')
-    setTimeout(() => {
-      window.location.reload()
-    }, 2000)
+    dispatch(deleteProduct(id)).then((data) => {
+      if (data.payload.success) {
+        setSuccess(true)
+        setTimeout(() => {
+          window.location.reload()
+        }, 2000)
+      }
+    }
   }
 
   React.useEffect(() => {
