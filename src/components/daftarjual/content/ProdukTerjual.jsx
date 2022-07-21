@@ -21,7 +21,7 @@ const ProdukTerjual = ({ setSuccess }) => {
           window.location.reload()
         }, 2000)
       }
-    }
+    })
   }
 
   React.useEffect(() => {
