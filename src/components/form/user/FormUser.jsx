@@ -48,15 +48,15 @@ const FormProduct = () => {
         message: '',
         success: null
     })
-    const messageUser= useSelector(state => state.users.messageUser)
-    const successUser= useSelector(state => state.users.successUser)
-    
+    const messageUser = useSelector(state => state.users.messageUser)
+    const successUser = useSelector(state => state.users.successUser)
+
     const handleValidate = (e) => {
         e.preventDefault()
         formUserValidation(data, files, fileRejections, setError)
     }
 
-    const handleCreate = async (e) => {
+    const handleUpdate = async (e) => {
         e.preventDefault()
         if (error.name !== '' || error.address !== '' || error.photo !== '' || error.phone !== '') {
             setAlert(true)
@@ -72,12 +72,14 @@ const FormProduct = () => {
                 profile.append("number_mobile", data.nohp)
                 profile.append("image", files[0])
                 dispatch(updateUser(profile)).then(
-                    data => {
-                        setAlert(true)
-                        setTimeout(() => {
-                            setAlert(false)
-                            window.location.reload()
-                        },2000)
+                    (res) => {
+                        if (res.payload.success) {
+                            setAlert(true)
+                            setTimeout(() => {
+                                setAlert(false)
+                                window.location.reload()
+                            }, 1000)
+                        }
                     }
                 )
             } catch (error) {
@@ -230,7 +232,7 @@ const FormProduct = () => {
 
                     <Grid container spacing={2} mt={2}>
                         <Grid item xs={12}>
-                            <Button fullWidth onMouseUp={handleValidate} variant="contained" color="primary" sx={{ height: '48px' }} onClick={handleCreate}>
+                            <Button fullWidth onMouseUp={handleValidate} variant="contained" color="primary" sx={{ height: '48px' }} onClick={handleUpdate}>
                                 Simpan
                             </Button>
                         </Grid>

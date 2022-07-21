@@ -77,18 +77,24 @@ const FormProduct = () => {
                 if (location !== '/info-produk') {
                     product.append("publish", true)
                     dispatch(updateProduct({ product, id })).then(
-                        data => {
-                            setTimeout(() => {
-                                navigate(`/daftar-jual`)
-                            }, 3000);
+                        (res) => {
+                            if (res.payload.success) {
+                                setTimeout(() => {
+                                    navigate(`/daftar-jual`)
+                                }, 1000);
+                            }
                         }
                     )
                 } else {
                     product.append("publish", true)
-                    dispatch(postProducts(product))
-                    setTimeout(() => {
-                        navigate(`/daftar-jual`)
-                    }, 3000);
+                    dispatch(postProducts(product)).then(
+                        (res) => {
+                            if (res.payload.success) {
+                                setTimeout(() => {
+                                    navigate(`/daftar-jual`)
+                                }, 1000);
+                            }
+                        })
                 }
             } catch (error) {
                 console.log(error);
@@ -117,11 +123,12 @@ const FormProduct = () => {
                 if (id) {
                     product.append("publish", productDetails.publish)
                     dispatch(updateProduct({ product, id })).then(
-                        data => {
-                            console.log(data)
-                            setTimeout(() => {
-                                navigate(`/detail-product-seller/${id}`)
-                            }, 3000);
+                        (res) => {
+                            if (res.payload.success) {
+                                setTimeout(() => {
+                                    navigate(`/detail-product-seller/${id}`)
+                                }, 1000);
+                            }
                         }
                     )
                 } else {
@@ -130,7 +137,7 @@ const FormProduct = () => {
                         if (data.payload.success) {
                             setTimeout(() => {
                                 navigate(`/detail-product-seller/${data.payload.data.product.productId}`)
-                            }, 3000);
+                            }, 1000);
                         } else {
                             setAlert(true)
                             setData({ ...data, message: data.payload.message, success: false })

@@ -3,7 +3,6 @@ import React from 'react'
 
 const ProductInfo = ({ data, handlePublish, handleEdit }) => {
     const formatter = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" })
-    console.log(data)
     return (
         <>
             <Box component={'div'} rowGap={2} p={4} flexDirection={'column'} display={'flex'} sx={{ boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.15)', borderRadius: '16px' }}>
