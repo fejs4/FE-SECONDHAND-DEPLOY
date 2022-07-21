@@ -31,7 +31,9 @@ const ProductInterest = ({data,handleOpen}) => {
                 setLove(false)
                 const detailWishlist = wishlistAmbil.filter(item => item.productId === Number(id))
                 const dataId = detailWishlist[0].id
-                dispatch(deleteWishlist(dataId))
+                if (dataId) {
+                    dispatch(deleteWishlist(dataId))
+                }
             }
         }
     }
