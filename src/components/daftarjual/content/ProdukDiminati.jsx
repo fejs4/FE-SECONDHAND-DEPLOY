@@ -29,7 +29,7 @@ const ProdukDiminati = () => {
     dispatch(deleteTawar(id)).then((res) => {if (res.payload.success) {
       setTimeout(() => {
         window.location.reload()
-      }, 2000);
+      }, 1000);
     }})
   }
 

@@ -19,7 +19,7 @@ const ProdukTerjual = ({ setSuccess }) => {
         setSuccess(true)
         setTimeout(() => {
           window.location.reload()
-        }, 2000)
+        }, 1000)
       }
     })
   }

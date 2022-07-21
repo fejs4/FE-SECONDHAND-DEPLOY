@@ -6,7 +6,7 @@ import { deleteProduct, fetchProductsUser, setDetail, setLoading } from '../../.
 import CardLoading from '../../loading/CardLoading';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
-const ListProductJual = ({setSuccess}) => {
+const ListProductJual = ({ setSuccess }) => {
     const dispatch = useDispatch()
     const formatter = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" })
     const data = useSelector(state => state.product.productUser)
@@ -23,10 +23,14 @@ const ListProductJual = ({setSuccess}) => {
 
     const handleDelete = (e, id) => {
         e.preventDefault()
-        dispatch(deleteProduct(id)).then(data => data.payload.success ? setSuccess(true) : '')
-        setTimeout(() => {
-            window.location.reload()
-        },2000)
+        dispatch(deleteProduct(id)).then((data) => {
+            if (data.payload.success) {
+                setSuccess(true)
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1000)
+            }
+        })
     }
 
     React.useEffect(() => {

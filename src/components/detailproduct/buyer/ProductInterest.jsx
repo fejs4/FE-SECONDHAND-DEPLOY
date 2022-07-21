@@ -44,7 +44,7 @@ const ProductInterest = ({data,handleOpen}) => {
 
     React.useEffect(() => {
         dispatch(fetchTawarBuyer())
-    },[dispatch])
+    },[dispatch,dataTawar,tawarID])
 
     React.useEffect(()=>{
         if (onWishlist) {
