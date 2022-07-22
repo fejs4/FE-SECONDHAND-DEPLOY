@@ -84,7 +84,6 @@ export const deleteTawar = createAsyncThunk(
 
 const initialState = {
     loading: false,
-    loadingDetail:true,
     error: null,
     tawar: {},
     tawarSeller: {},
@@ -137,7 +136,7 @@ const tawarSlice = createSlice({
 
         // Fetching Detail Tawar
         [fetchDetailTawar.pending]: (state, action) => {
-            return { ...state, error: null }
+            return { ...state,loading: true, error: null }
         },
         [fetchDetailTawar.fulfilled]: (state, action) => {
             return { ...state, detailTawar: action.payload.data }
@@ -162,7 +161,7 @@ const tawarSlice = createSlice({
             return { ...state, loading: true, error: null, }
         },
         [deleteTawar.fulfilled]: (state, action) => {
-            return { ...state, message: action.payload.message, success: action.payload.success}
+            return { ...state, message: action.payload.success ? 'Berhasil menghapus penawaran' : action.payload.message, success: action.payload.success}
         },
         [deleteTawar.rejected]: (state, action) => {
             return { ...state, error: action.error }

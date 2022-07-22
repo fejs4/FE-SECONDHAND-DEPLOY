@@ -9,7 +9,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import ModalDiterima from './ModalDiterima';
 import ModalStatus from './ModalStatus';
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchDetailTawar, setLoadingDetail } from '../../redux/tawar';
+import { fetchDetailTawar, setLoading } from '../../redux/tawar';
 import { createTransaksi, fetchTransaksiSeller, setMessageTransaksi, setSuccess } from '../../redux/transaksi';
 import InfoPenawaranLoading from '../loading/InfoPenawaranLoading';
 
@@ -49,12 +49,15 @@ const DataPenawar = () => {
             }
             dispatch(createTransaksi(data)).then(data => {
                 if (data.payload.success) {
+                    dispatch(fetchDetailTawar(id))
+                    dispatch(fetchTransaksiSeller())
                     dispatch(setMessageTransaksi('Berhasil menolak tawaran'))
                     dispatch(setSuccess(true))
                     setTimeout(() => {
                         dispatch(setMessageTransaksi(''))
                         dispatch(setSuccess())
-                    }, 2000);
+                        dispatch(setLoading(false))
+                    }, 1500);
                 }
             })
         } catch (err) {
@@ -74,6 +77,11 @@ const DataPenawar = () => {
             }
             dispatch(createTransaksi(data)).then(data => {
                 if (data.payload.success) {
+                    dispatch(fetchDetailTawar(id))
+                    dispatch(fetchTransaksiSeller())
+                    setTimeout(() => {
+                        dispatch(setLoading(false))
+                    }, 1500)
                 }
             })
         } catch (err) {
@@ -85,7 +93,7 @@ const DataPenawar = () => {
     const [status, setStatus] = React.useState('')
     const [confirm, setConfirm] = React.useState(false)
     const dataTransaksi = useSelector(state => state.transaksi.transaksiSeller)
-    const loading = useSelector(state => state.tawar.loadingDetail)
+    const loading = useSelector(state => state.tawar.loading)
     const filterTransaksi = Object.keys(dataTransaksi).length !== 0 ? dataTransaksi.filter(data => data.tawarId === Number(id)) : ''
 
     const [alert, setAlert] = React.useState(true)
@@ -93,19 +101,20 @@ const DataPenawar = () => {
     const success = useSelector(state => state.transaksi.success)
 
     React.useEffect(() => {
-        dispatch(fetchDetailTawar(id))
         dispatch(fetchTransaksiSeller())
-        if (Object.keys(filterTransaksi).length !== 0 && filterTransaksi[0].status === 'pending') {
-            setConfirm(true)
-        }
+    }, [dispatch])
+
+    React.useEffect(() => {
+        dispatch(fetchDetailTawar(id))
         setTimeout(() => {
-            dispatch(setLoadingDetail(false))
+            dispatch(setLoading(false))
         }, 1500)
-    }, [dispatch,dataTransaksi, filterTransaksi, id])
+    }, [])
+
     return (
         <Box width={{ md: '70%', xs: '90%' }} mx={'auto'} mt={{ xs: 'unset', md: 3 }}>
             <Toolbar position='relative' >
-                <Stack position="absolute" display={message !== '' ? "block" : "none"} className="alert" mx={'auto'} width={{ md: '40%', xs: '90%' }} sx={{ zIndex:100,left: 0, right: 0, top: 0, transition: '0.5s' }} style={{ 'marginTop': alert ? "-15px" : "-350px" }} >
+                <Stack position="absolute" display={message !== '' ? "block" : "none"} className="alert" mx={'auto'} width={{ md: '40%', xs: '90%' }} sx={{ zIndex: 100, left: 0, right: 0, top: 0, transition: '0.5s' }} style={{ 'marginTop': alert ? "-15px" : "-350px" }} >
                     <Alert variant="filled" severity={success ? "success" : "error"} onClose={() => setAlert(false)}>{message}</Alert>
                 </Stack>
                 <Link to={-1}>
@@ -133,9 +142,14 @@ const DataPenawar = () => {
                                             <Box component={'img'} src={`https://be-kel1.herokuapp.com/public/images/${detailPenawaran[0].product.images[0]}`} sx={{ height: '60px', width: '60px', objectFit: 'contain', borderRadius: '16px' }} />
                                         </Grid>
                                         <Grid item xs={6}>
-                                            <Typography variant="caption" color='text.secondary' component="h2" >
-                                                Penawaran Produk
-                                            </Typography>
+                                            <Box display={'flex'}>
+                                                <Typography variant="caption" color='text.secondary' component="h2" >
+                                                    Penawaran Produk
+                                                </Typography>
+                                                <Typography  sx={{ml:.5,  color: detailPenawaran[0].status === 'accepted' ? 'green' : detailPenawaran[0].status === 'rejected' ? 'red' : 'orange' }} variant="caption" color='text.secondary' component="h2" >
+                                                    {detailPenawaran[0].status === 'accepted' ? 'Accepted' : detailPenawaran[0].status === 'rejected' ? 'Rejected' : 'Pending'}
+                                                </Typography>
+                                            </Box>
                                             <Typography variant='subtitle1' fontWeight={550} my={0} >
                                                 {detailPenawaran[0].product.name}
                                             </Typography>
@@ -152,15 +166,15 @@ const DataPenawar = () => {
                                             </Typography>
                                         </Grid>
                                         <Grid container spacing={1} mt={2} item xs={12} justifyContent={'end'}>
-                                            {confirm ?
+                                            {Object.keys(filterTransaksi).length !== 0 && filterTransaksi[0].status === 'pending' ?
                                                 <>
-                                                    <Grid item xs={3}>
+                                                    <Grid item xs={3} sx={{ display: Object.keys(filterTransaksi).length !== 0 ? filterTransaksi[0].status !== 'pending' ? 'none' : 'block' : 'unset' }}>
                                                         <Button fullWidth variant="outlined" color="primary" onClick={handleOpenStatus} sx={{ height: '40px', borderRadius: '25px', display: filterTransaksi[0].status !== 'pending' ? 'none' : 'block' }} >
                                                             Status
                                                         </Button>
                                                     </Grid>
-                                                    <Grid item xs={3}>
-                                                        <a target={"_blank"} rel="noopener noreferrer" href={`https://wa.me/${detailPenawaran[0].user.number_mobile}`} style={{ textDecoration:'none' }}>
+                                                    <Grid item xs={3} sx={{ display: Object.keys(filterTransaksi).length !== 0 ? filterTransaksi[0].status !== 'pending' ? 'none' : 'block' : 'unset' }}>
+                                                        <a target={"_blank"} rel="noopener noreferrer" href={`https://wa.me/${detailPenawaran[0].user.number_mobile}`} style={{ textDecoration: 'none' }}>
                                                             <Button fullWidth variant="contained" color="primary" sx={{ height: '40px', borderRadius: '25px', display: filterTransaksi[0].status !== 'pending' ? 'none' : 'flex', alignItems: 'center' }}>
                                                                 <Typography variant='caption'>
                                                                     Hubungi di

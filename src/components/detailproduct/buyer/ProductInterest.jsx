@@ -55,7 +55,6 @@ const ProductInterest = ({data,handleOpen}) => {
         dispatch(fetchWishlist())
     },[dispatch,onWishlist])
 
- 
     return (
         <>
             <Box component={'div'} rowGap={2} p={4} flexDirection={'column'} display={'flex'} sx={{ boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.15)', borderRadius: '16px' }}>
@@ -75,7 +74,7 @@ const ProductInterest = ({data,handleOpen}) => {
                 </Typography>
                 
                 <Button color='primary' variant='contained' disabled={tawarID.length !== 0 || data.isSold} onClick={handleOpen} sx={{ borderRadius: '16px', height: 'auto', minHeight:'48px', display: { md: 'block', xs: 'none' } }}>
-                    {Object.keys(tawarID).length === 0 ? data.isSold ? 'Produk telah terjual':'Saya tertarik ingin nego' : 'Menunggu respon penjual'}
+                    {Object.keys(tawarID).length !== 0 ? data.isSold ? 'Produk telah terjual' : 'Menunggu respon penjual' : 'Saya tertarik ingin nego'}
                 </Button>
             </Box>
         </>

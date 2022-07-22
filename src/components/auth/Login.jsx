@@ -33,6 +33,9 @@ const Login = () => {
         if (error.email !== '' || error.password !== '') {
             dispatch(setSuccessAuth(false))
             dispatch(setMessageAuth('Gagal login, data belum terpenuhi!'))
+            setTimeout(() => {
+                dispatch(setMessageAuth(''))
+            }, 1500)
         } else {
             try {
                 const user = {
@@ -42,7 +45,12 @@ const Login = () => {
                 dispatch(authLogin(user)).then((res) => {
                     if (res.payload.success) {
                         setTimeout(() => {
+                            dispatch(setMessageAuth(''))
                             window.location.reload()
+                        }, 1500)
+                    }else{
+                        setTimeout(() => {
+                            dispatch(setMessageAuth(''))
                         }, 1500)
                     }
                 })

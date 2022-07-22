@@ -6,12 +6,8 @@ import { fetchDetailTawar } from '../../redux/tawar'
 
 const BuyerInfo = () => {
   const dispatch = useDispatch()
-  const { id } = useParams()
   const detailPenawaran = useSelector(state => state.tawar.detailTawar)
 
-  React.useEffect(() => {
-    dispatch(fetchDetailTawar(id))
-  }, [id]);
   return (
     <>
       <Box component={'div'} rowGap={2} p={{ xs: 2, md: 4 }} display={'flex'} mt={3} sx={{ boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.15)', borderRadius: '16px' }}>

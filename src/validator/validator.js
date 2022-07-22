@@ -9,7 +9,7 @@ export const loginValidation = (values,setError) =>{
 export const registerValidation = (values,setError) =>{
     const error = []
     const patternEmail = /^[a-zA-Z0-9_\.]+@+[a-zA-Z]+\./g
-    error.name = values.name.length !== 0 ? '' : 'name cannot be null'
+    error.name = values.name.length !== 0 ? '' : 'name is not valid'
     error.email = patternEmail.test(values.email) ? '' : 'email invalid'
     error.password = values.password.length >= 8 ? '' : 'password must be at least 8 character'
     setError({...error})
@@ -17,9 +17,9 @@ export const registerValidation = (values,setError) =>{
 
 export const formUserValidation = (data,files,fileRejections, setError) =>{
     const error = []
-    error.name = data.nama.length !== 0 ? '' : 'name cannot be null'
-    error.address = data.alamat.length !== 0 ? '' : 'address cannot be null'
-    error.phone = data.nohp.length !== 0 ? '' : 'number phone cannot be null'
+    error.name = data.nama.length !== 0 ? '' : 'name is not valid'
+    error.address = data.alamat.length !== 0 ? '' : 'address is not valid'
+    error.phone = data.nohp.length !== 0 && typeof Number(data.nohp) === 'number' ? '' : 'number phone is not valid'
     error.photo = fileRejections.length > 4 ? 'image cannot more than 4 files' : files.length === 0 ? 'image cannot be null' : ''
     setError({...error})
 }

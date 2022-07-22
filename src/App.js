@@ -18,6 +18,8 @@ import Wishlist from './pages/Wishlist';
 import React from 'react';
 import ProtectedRoutes from './components/auth/ProtectedRoutes';
 import ErrorNotFound from './components/error/ErrorNotFound';
+import Transaction from './components/transaction/Transaction';
+import TransactionLog from './pages/TransactionLog';
 
 function App() {
   return (
@@ -40,6 +42,7 @@ function App() {
               <Route path='/detail-product-seller/:id' element={<DetailProductSeller />} />
               <Route path='/detail-product-buyer/:id' element={<DetailProductBuyer />} />
               <Route path='/info-penawar/:id' element={<InfoPenawar />} />
+              <Route path='/transaksi' element={<TransactionLog />} />
             </Route>
           </Routes>
         </ThemeProvider>

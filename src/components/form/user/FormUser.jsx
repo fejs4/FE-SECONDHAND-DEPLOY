@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { formUserValidation } from '../../../validator/validator';
 import { updateUser } from '../../../redux/users';
-
+import DataCity from './dummy.json';
+import { makeStyles } from '@mui/styles';
 
 const thumb = {
     display: 'inline-flex',
@@ -34,7 +35,21 @@ const img = {
     objectFit: 'cover'
 };
 
+const useStyles = makeStyles(theme => ({
+    root: {
+      display: "flex",
+      flexWrap: "wrap"
+    },
+    formControl: {
+      minWidth: 120
+    },
+    menu: {
+      height: 300
+    }
+  }));
+
 const FormProduct = () => {
+    const classes = useStyles();
     const [files, setFiles] = useState([]);
     const [error, setError] = React.useState({});
     const userProfile = useSelector(state => state.auth.userProfile)
@@ -183,13 +198,17 @@ const FormProduct = () => {
                         <Select
                             id="demo-simple-select"
                             required
-                            sx={{ mt: 0, borderRadius: '16px', mb: 2 }}
+                            sx={{ mt: 0, borderRadius: '16px', mb: 2}}
                             defaultValue={userProfile.city ? userProfile.city : data.kota}
                             onChange={(e) => setData({ ...data, kota: e.target.value })}
+                            MenuProps={{ className: classes.menu }}
                         >
-                            <MenuItem sx={{ width: '100%' }} value={'jakarta'}>Jakarta</MenuItem>
-                            <MenuItem sx={{ width: '100%' }} value={'bogor'}>Bogor</MenuItem>
-                            <MenuItem sx={{ width: '100%' }} value={'depok'}>Depok</MenuItem>
+                            {DataCity.kota.map((item, index) => {
+                                return(
+                                    <MenuItem key={index} sx={{ width: '100%' }} value={item}>{item}</MenuItem>
+                                )
+                            })}
+                           
                         </Select>
                     </FormControl>
 

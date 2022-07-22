@@ -2,9 +2,10 @@ import { Box, Card, CardActionArea, CardContent, CardMedia, Grid, Typography } f
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { deleteProduct, fetchProductsUser, setDetail, setLoading } from '../../../redux/product';
+import { deleteProduct, fetchProductsUser, setDetail, setLoading, setMessageProduct } from '../../../redux/product';
 import CardLoading from '../../loading/CardLoading';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import { setMessageUser, setSuccessUser } from '../../../redux/users';
 
 const ListProductJual = ({ setSuccess }) => {
     const dispatch = useDispatch()
@@ -13,9 +14,17 @@ const ListProductJual = ({ setSuccess }) => {
     const loading = useSelector(state => state.product.loading)
     const userProfile = useSelector(state => state.auth.userProfile)
     const navigate = useNavigate()
+    
     const handleSell = () => {
         if (Object.keys(userProfile).length !== 0) {
-            userProfile.city ? navigate(`/info-produk`) : navigate(`/info-user/${userProfile.id}`)
+            if (userProfile.city) {
+                navigate(`/info-produk`)
+            } else {
+                dispatch(setMessageUser('Lengkapi profil untuk dapat menjual produk'))
+                dispatch(setSuccessUser(false))
+                navigate(`/info-user/${userProfile.id}`)
+            }
+
         } else {
             navigate('/login')
         }
@@ -28,6 +37,7 @@ const ListProductJual = ({ setSuccess }) => {
                 dispatch(fetchProductsUser())
                 setSuccess(true)
                 setTimeout(() => {
+                    dispatch(setMessageProduct(''))
                     dispatch(setLoading(false))
                 }, 1500);
             }

@@ -44,6 +44,17 @@ export const fetchTransaksiSeller = createAsyncThunk(
         return response.data;
     }
 );
+export const fetchTransaksiBuyer = createAsyncThunk(
+    'transaksi/fetchTransaksiBuyer',
+    async () => {
+        const token = localStorage.getItem('token')
+        const response = await axios.get(`https://be-kel1.herokuapp.com/transaksi/buyer`,
+        {headers: {
+            Authorization: token,
+        }})
+        return response.data;
+    }
+);
 
 
 const initialState = {
@@ -51,7 +62,8 @@ const initialState = {
     error: null,
     message:'',
     success: false,
-    transaksiSeller: {}
+    transaksiSeller: {},
+    transaksiBuyer: {}
 
 }
 
@@ -101,6 +113,17 @@ const transaksiSlice = createSlice({
             return { ...state, transaksiSeller: action.payload.data }
         },
         [fetchTransaksiSeller.rejected]: (state, action) => {
+            return { ...state, error: action.error }
+        },
+
+        // fetchTransaksiBuyer
+        [fetchTransaksiBuyer.pending]: (state, action) => {
+            return { ...state, loading: true, error: null, }
+        },
+        [fetchTransaksiBuyer.fulfilled]: (state, action) => {
+            return { ...state, transaksiBuyer: action.payload.data }
+        },
+        [fetchTransaksiBuyer.rejected]: (state, action) => {
             return { ...state, error: action.error }
         },
          

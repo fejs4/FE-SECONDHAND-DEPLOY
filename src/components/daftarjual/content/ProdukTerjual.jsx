@@ -2,7 +2,7 @@ import { Box, Card, CardActionArea, CardContent, CardMedia, Grid, Typography } f
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteProduct, fetchProductSold, setLoading } from '../../../redux/product';
+import { deleteProduct, fetchProductSold, setLoading, setMessageProduct } from '../../../redux/product';
 import CardLoading from '../../loading/CardLoading';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
@@ -18,6 +18,10 @@ const ProdukTerjual = ({ setSuccess }) => {
       if (data.payload.success) {
         dispatch(fetchProductSold())
         setSuccess(true)
+        setTimeout(() => {
+          dispatch(setMessageProduct(''))
+          dispatch(setLoading(false))
+      }, 1500);
       }
     })
   }

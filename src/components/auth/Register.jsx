@@ -37,6 +37,9 @@ const Register = () => {
         if (error.email !== '' || error.name !== '' || error.password !== '' ) {
             dispatch(setSuccessAuth(false))
             dispatch(setMessageAuth('Gagal register, data belum terpenuhi!'))
+            setTimeout(() => {
+                dispatch(setMessageAuth(''))
+            }, 1500)
         }else{
             try {
                 const user = {
@@ -49,7 +52,11 @@ const Register = () => {
                         setTimeout(() => {
                             navigate('/login')
                             dispatch(setMessageAuth(''))
-                        }, 1000)
+                        }, 1500)
+                    }else{
+                        setTimeout(() => {
+                            dispatch(setMessageAuth(''))
+                        }, 1500)
                     }
                 })
             } catch (error) {

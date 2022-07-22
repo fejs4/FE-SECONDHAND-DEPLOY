@@ -2,8 +2,9 @@ import React from 'react'
 import { Box, Button, FormControl, FormControlLabel, Modal, Radio, RadioGroup, Typography } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch } from 'react-redux';
-import { updateTransaksi } from '../../redux/transaksi';
+import { fetchTransaksiSeller, setLoading, updateTransaksi } from '../../redux/transaksi';
 import { useParams } from 'react-router-dom';
+import { fetchDetailTawar } from '../../redux/tawar';
 
 const style = {
     position: 'absolute',
@@ -28,6 +29,13 @@ const ModalStatus = ({ open, handleClose, handlePost, transaksiId, status, setSt
                 transaksiId: Object.keys(idTransaksi).length !== 0? idTransaksi[0].id : null
             }
             dispatch(updateTransaksi({ data, id })).then(data => {
+                if (data.payload.success) {
+                    dispatch(fetchDetailTawar(id))
+                    dispatch(fetchTransaksiSeller())
+                    setTimeout(() => {
+                        dispatch(setLoading(false))
+                    }, 1500)
+                } 
                 handleClose()
             })
         } catch (err) {
