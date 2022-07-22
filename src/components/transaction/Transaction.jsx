@@ -171,7 +171,7 @@ const Transaction = () => {
                             :
                             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
                                 <Typography>
-                                    Wishlist Kosong
+                                    Transaksi Kosong
                                 </Typography>
                             </Box>
                         }
