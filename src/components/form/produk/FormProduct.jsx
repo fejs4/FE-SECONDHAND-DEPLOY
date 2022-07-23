@@ -43,7 +43,7 @@ const FormProduct = () => {
         {
             nama: '',
             harga: '',
-            kategori:'semua',
+            kategori: 'semua',
             deskripsi: '',
             message: '',
             success: null
@@ -83,7 +83,7 @@ const FormProduct = () => {
                                 setTimeout(() => {
                                     navigate(`/daftar-jual`)
                                 }, 2000);
-                            }else{
+                            } else {
                                 setTimeout(() => {
                                     navigate(`/daftar-jual`)
                                 }, 2000);
@@ -99,7 +99,7 @@ const FormProduct = () => {
                                 setTimeout(() => {
                                     navigate(`/daftar-jual`)
                                 }, 2000);
-                            }else{
+                            } else {
                                 setTimeout(() => {
                                     navigate(`/daftar-jual`)
                                 }, 2000);
@@ -191,18 +191,18 @@ const FormProduct = () => {
             </div>
         </div>
     ))
-    
+
     useEffect(() => {
         if (location !== `/info-produk`) {
             setData({
                 ...data,
-                nama: Object.keys(productDetails).length !==0 ? productDetails.name : '',
-                harga: Object.keys(productDetails).length !==0 ? productDetails.price : '',
-                kategori: Object.keys(productDetails).length !==0 ? productDetails.category : 'semua',
-                deskripsi: Object.keys(productDetails).length !==0 ? productDetails.description : '',
+                nama: Object.keys(productDetails).length !== 0 ? productDetails.name : '',
+                harga: Object.keys(productDetails).length !== 0 ? productDetails.price : '',
+                kategori: Object.keys(productDetails).length !== 0 ? productDetails.category : 'semua',
+                deskripsi: Object.keys(productDetails).length !== 0 ? productDetails.description : '',
             })
         }
-    }, [location,productDetails]);
+    }, [location, productDetails]);
 
     useEffect(() => {
         if (location === `/info-produk/update/${id}`) {
@@ -221,10 +221,10 @@ const FormProduct = () => {
             <Toolbar position='relative' >
                 <Link to={-1}>
                     <ArrowBackSharpIcon sx={{
-                        display: { md: 'block', xs: 'none' }, borderRadius: '50px', background: 'white'
+                        display: { md: 'block', xs: 'none' }, borderRadius: '50px', background: 'white', color: 'purple'
                         , zIndex: 100, padding: 1, cursor: 'pointer', '&:hover': {
                             opacity: [0.9, 0.8, 0.7],
-                            color: 'purple'
+                            color: 'blue'
                         }
                     }} />
                 </Link>

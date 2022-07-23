@@ -5,8 +5,9 @@ import { Button, Grid, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteWishlist, fetchWishlist } from "../../redux/wishlist";
+import { deleteWishlist, fetchWishlist, setLoading } from "../../redux/wishlist";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import WishlistLoading from "../loading/WishlistLoading";
 
 const Wishlist = ({ wishlist, data, setWishlist, handleChange, handleOpen, setSuccess }) => {
   const dispatch = useDispatch();
@@ -31,19 +32,24 @@ const Wishlist = ({ wishlist, data, setWishlist, handleChange, handleOpen, setSu
     const date = new Date(datenow)
     return (date.getDate() + " " + months[date.getMonth()] + ", " + addZero(date.getHours()) + ":" + addZero(date.getMinutes()))
   }
+
+  const loading = useSelector(state => state.wishlist.loading)
   
   React.useEffect(() => {
     dispatch(fetchWishlist());
+    setTimeout(() => {
+      dispatch(setLoading(false))
+    }, 1500);
   }, [dispatch]);
   return (
     <Box width={{ md: "70%", xs: "100%" }} mx={"auto"} mt={3}>
       <Toolbar position="relative">
         <Link to={-1}>
           <ArrowBackSharpIcon sx={{
-            display: { md: 'block', xs: 'none' }, borderRadius: '50px', background: 'white'
+            display: { md: 'block', xs: 'none' }, borderRadius: '50px', background: 'white',color: 'purple'
             , zIndex: 100, padding: 1, cursor: 'pointer', '&:hover': {
               opacity: [0.9, 0.8, 0.7],
-              color: 'purple'
+              color: 'blue'
             }
           }} />
         </Link>
@@ -54,7 +60,8 @@ const Wishlist = ({ wishlist, data, setWishlist, handleChange, handleOpen, setSu
           mx={"auto"}
           sx={{ left: 0, right: 0, top: 0 }}
         >
-          {Object.keys(wishlistAmbil).length !== 0
+          {loading ? <WishlistLoading length={Object.keys(wishlistAmbil).length}/> :
+          Object.keys(wishlistAmbil).length !== 0
             ? wishlistAmbil.map((res, index) => {
               return (
 
@@ -109,6 +116,7 @@ const Wishlist = ({ wishlist, data, setWishlist, handleChange, handleOpen, setSu
                           fontWeight={550}
                           my={0}
                           fontSize={{ md: "1rem", xs: ".8rem" }}
+                          sx={{ maxWidth:'200px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}
                         >
                           {res.product.name ? res.product.name : ''}
                         </Typography>
@@ -117,6 +125,7 @@ const Wishlist = ({ wishlist, data, setWishlist, handleChange, handleOpen, setSu
                           fontWeight={550}
                           my={0}
                           fontSize={{ md: "1rem", xs: ".8rem" }}
+                          sx={{ maxWidth:'200px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}
                         >
                           {res.product.price ? formatter.format(res.product.price) : ''}
                         </Typography>
@@ -127,6 +136,7 @@ const Wishlist = ({ wishlist, data, setWishlist, handleChange, handleOpen, setSu
                           color="text.secondary"
                           component="h2"
                           fontSize={{ md: ".8rem", xs: ".6rem" }}
+                          sx={{ maxWidth:'200px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}
                         >
                           {res.createdAt ? toDate(res.createdAt) : ''}
                         </Typography>
@@ -147,7 +157,7 @@ const Wishlist = ({ wishlist, data, setWishlist, handleChange, handleOpen, setSu
                     </Grid>
                   </Box>
                 </Box>
-              );
+              )
             })
 
             :

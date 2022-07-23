@@ -6,6 +6,7 @@ import { deleteProduct, fetchProductsUser, setDetail, setLoading, setMessageProd
 import CardLoading from '../../loading/CardLoading';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { setMessageUser, setSuccessUser } from '../../../redux/users';
+import { fetchNotif } from '../../../redux/notif';
 
 const ListProductJual = ({ setSuccess }) => {
     const dispatch = useDispatch()
@@ -34,6 +35,7 @@ const ListProductJual = ({ setSuccess }) => {
         e.preventDefault()
         dispatch(deleteProduct(id)).then((data) => {
             if (data.payload.success) {
+                dispatch(fetchNotif())
                 dispatch(fetchProductsUser())
                 setSuccess(true)
                 setTimeout(() => {

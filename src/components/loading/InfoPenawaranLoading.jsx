@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Divider, Grid, Skeleton } from '@mui/material'
+import { Box, Grid, Skeleton } from '@mui/material'
 
 const InfoPenawaranLoading = () => {
     return (

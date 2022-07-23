@@ -37,16 +37,16 @@ const img = {
 
 const useStyles = makeStyles(theme => ({
     root: {
-      display: "flex",
-      flexWrap: "wrap"
+        display: "flex",
+        flexWrap: "wrap"
     },
     formControl: {
-      minWidth: 120
+        minWidth: 120
     },
     menu: {
-      height: 300
+        height: 300
     }
-  }));
+}));
 
 const FormProduct = () => {
     const classes = useStyles();
@@ -141,10 +141,10 @@ const FormProduct = () => {
             <Toolbar position='relative' >
                 <Link to={-1}>
                     <ArrowBackSharpIcon sx={{
-                        display: { md: 'block', xs: 'none' }, borderRadius: '50px', background: 'white'
+                        display: { md: 'block', xs: 'none' }, borderRadius: '50px', background: 'white', color: 'purple'
                         , zIndex: 100, padding: 1, cursor: 'pointer', '&:hover': {
                             opacity: [0.9, 0.8, 0.7],
-                            color: 'purple'
+                            color: 'blue'
                         }
                     }} />
                 </Link>
@@ -198,17 +198,17 @@ const FormProduct = () => {
                         <Select
                             id="demo-simple-select"
                             required
-                            sx={{ mt: 0, borderRadius: '16px', mb: 2}}
+                            sx={{ mt: 0, borderRadius: '16px', mb: 2 }}
                             defaultValue={userProfile.city ? userProfile.city : data.kota}
                             onChange={(e) => setData({ ...data, kota: e.target.value })}
                             MenuProps={{ className: classes.menu }}
                         >
                             {DataCity.kota.map((item, index) => {
-                                return(
+                                return (
                                     <MenuItem key={index} sx={{ width: '100%' }} value={item}>{item}</MenuItem>
                                 )
                             })}
-                           
+
                         </Select>
                     </FormControl>
 

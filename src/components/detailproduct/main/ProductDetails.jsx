@@ -103,9 +103,9 @@ const ProductDetails = ({ status }) => {
             <Box display={{ sm: 'block', md: 'none' }} mt={{ sm: 5, xs: 5 }}>
               <Link to={-1}>
                 <ArrowBackSharpIcon sx={{
-                  fontSize: { sm: '2.5rem', xs: '2rem' }, zIndex: 10, padding: 1, position: 'absolute', borderRadius: '50px', background: 'white', left: '4rem', cursor: 'pointer', '&:hover': {
+                  fontSize: { sm: '2.5rem', xs: '2rem' }, zIndex: 10, padding: 1, position: 'absolute', borderRadius: '50px', color:'purple', background: 'white', left: '4rem', cursor: 'pointer', '&:hover': {
                     opacity: [0.9, 0.8, 0.7],
-                    color: 'purple'
+                    color: 'blue'
                   }
                 }} />
               </Link>

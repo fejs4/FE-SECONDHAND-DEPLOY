@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { deleteProduct, fetchProductSold, setLoading, setMessageProduct } from '../../../redux/product';
 import CardLoading from '../../loading/CardLoading';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import { fetchNotif } from '../../../redux/notif';
 
 const ProdukTerjual = ({ setSuccess }) => {
   const dispatch = useDispatch()
@@ -17,6 +18,7 @@ const ProdukTerjual = ({ setSuccess }) => {
     dispatch(deleteProduct(id)).then((data) => {
       if (data.payload.success) {
         dispatch(fetchProductSold())
+        dispatch(fetchNotif())
         setSuccess(true)
         setTimeout(() => {
           dispatch(setMessageProduct(''))

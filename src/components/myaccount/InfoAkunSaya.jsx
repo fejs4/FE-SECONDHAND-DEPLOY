@@ -17,10 +17,10 @@ const InfoAkunSaya = () => {
             <Toolbar position='relative' >
                 <Link to={-1}>
                     <ArrowBackSharpIcon sx={{
-                        display: { md: 'block', xs: 'none' }, borderRadius: '50px', background: 'white'
+                        display: { md: 'block', xs: 'none' }, borderRadius: '50px', background: 'white', color: 'purple'
                         , zIndex: 100, padding: 1, cursor: 'pointer', '&:hover': {
                             opacity: [0.9, 0.8, 0.7],
-                            color: 'purple'
+                            color: 'blue'
                         }
                     }} />
                 </Link>
@@ -32,9 +32,9 @@ const InfoAkunSaya = () => {
                                 alt='profile'
                                 sx={{ borderRadius: '12px', width: '96px', height: '96px', objectFit: 'cover', boxShadow: ' 0px 0px 10px rgba(0, 0, 0, 0.15)' }}
                             />
-                            : 
-                            <Box sx={{ borderRadius: '12px',display:'flex', alignItems:'center',justifyContent:'center', width: '96px', height: '96px', objectFit: 'cover', boxShadow: ' 0px 0px 10px rgba(0, 0, 0, 0.15)' }}>
-                                <PersonOutlineOutlinedIcon sx={{width:'2em', height:'2em'}}/>
+                            :
+                            <Box sx={{ borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '96px', height: '96px', objectFit: 'cover', boxShadow: ' 0px 0px 10px rgba(0, 0, 0, 0.15)' }}>
+                                <PersonOutlineOutlinedIcon sx={{ width: '2em', height: '2em' }} />
                             </Box>
                         }
                     </Box>

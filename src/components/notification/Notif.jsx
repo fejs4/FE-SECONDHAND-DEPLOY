@@ -56,13 +56,13 @@ const Notif = () => {
                                     <Typography variant="caption" color='text.secondary' component="h2" >
                                         Penawaran Produk
                                     </Typography>
-                                    <Typography variant='subtitle1' fontWeight={550} my={0} >
+                                    <Typography variant='subtitle1' fontWeight={550} my={0} sx={{ maxWidth:'400px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}>
                                         {item.product.name}
                                     </Typography>
-                                    <Typography variant='subtitle1' fontWeight={550} my={0} >
+                                    <Typography variant='subtitle1' fontWeight={550} my={0} sx={{ maxWidth:'400px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}>
                                         {formatter.format(item.product.price)}
                                     </Typography>
-                                    <Typography variant='subtitle1' fontWeight={550} my={0} >
+                                    <Typography variant='subtitle1' fontWeight={550} my={0} sx={{ maxWidth:'400px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}>
                                         Ditawar {formatter.format(item.tawar.price)}
                                     </Typography>
                                 </Grid>
@@ -93,28 +93,28 @@ const Notif = () => {
                                     backgroundColor: '#eee',
                                 }
                             }} >
-                                <Grid item xs={2} md={3} textAlign="center">
+                                <Grid item xs={2} textAlign="center">
                                     <IconButton >
                                         <Avatar alt="" src={`https://be-kel1.herokuapp.com/public/images/${item.product.images[0]}`} />
                                     </IconButton>
                                 </Grid>
-                                <Grid item xs={7} md={6}>
+                                <Grid item xs={6}>
                                     <Typography variant="caption" color='text.secondary' component="h2" >
                                         Penawaran Produk
                                     </Typography>
-                                    <Typography variant='subtitle1' fontWeight={550} my={0} sx={{ fontSize:{md:'unset', xs:'.8rem'} }}>
+                                    <Typography variant='subtitle1' fontWeight={550} my={0} sx={{ maxWidth:'400px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}>
                                         {item.product.name}
                                     </Typography>
-                                    <Typography variant='subtitle1' fontWeight={550} my={0} sx={{ fontSize:{md:'unset', xs:'.8rem'} }}>
+                                    <Typography variant='subtitle1' fontWeight={550} my={0} sx={{ maxWidth:'400px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}>
                                         <s>{formatter.format(item.product.price)}</s>
                                     </Typography>
-                                    <Typography variant='subtitle1' fontWeight={550} my={0} sx={{ fontSize:{md:'unset', xs:'.8rem'} }}>
+                                    <Typography variant='subtitle1' fontWeight={550} my={0} sx={{ maxWidth:'400px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}>
                                         Berhasil Ditawar {formatter.format(item.tawar.price)}
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={3} md={3} textAlign="end" >
+                                <Grid item xs={4} textAlign="end" >
                                     <Box justifyContent={'flex-end'} alignItems={'center'} display={'flex'} sx={{ marginTop: '-8px' }}>
-                                        <Typography variant="caption" color='text.secondary' component="h2" sx={{ fontSize:{md:'unset', xs:'.6rem'} }}>
+                                        <Typography variant="caption" color='text.secondary' component="h2" >
                                             {toDate(item.createdAt)}
                                         </Typography>
                                         <IconButton onClick={(e) => handleDelete(e, item.id)}>
@@ -147,10 +147,10 @@ const Notif = () => {
                                     <Typography variant="caption" color='text.secondary' component="h2" >
                                         Berhasil di terbitkan
                                     </Typography>
-                                    <Typography variant='subtitle1' fontWeight={550} my={0} >
+                                    <Typography variant='subtitle1' fontWeight={550} my={0} sx={{ maxWidth:'400px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}>
                                         {item.product.name}
                                     </Typography>
-                                    <Typography variant='subtitle1' fontWeight={550} my={0} >
+                                    <Typography variant='subtitle1' fontWeight={550} my={0} sx={{ maxWidth:'400px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}>
                                         {formatter.format(item.product.price)}
                                     </Typography>
                                 </Grid>
