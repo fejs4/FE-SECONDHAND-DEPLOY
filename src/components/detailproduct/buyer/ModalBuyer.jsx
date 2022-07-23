@@ -40,7 +40,7 @@ const ModalBuyer = ({ data, open, handleClose, handlePost }) => {
                     }
                     try {
                         dispatch(postTawar(data)).then((data) => {
-                            data.payload.success && dispatch(fetchTawarBuyer()) 
+                            data.payload.success && dispatch(fetchTawarBuyer())
                             dispatch(fetchNotif())
                             handlePost()
                             setTimeout(() => {
@@ -57,11 +57,17 @@ const ModalBuyer = ({ data, open, handleClose, handlePost }) => {
                 dispatch(setMessageUser('Lengkapi profil untuk dapat menawar produk'))
                 dispatch(setSuccessUser(false))
                 navigate(`/info-user/${dataUser.id}`)
+                setTimeout(() => {
+                    dispatch(setMessageUser(''))
+                }, 1500);
             }
         } else {
             dispatch(setMessageAuth('Anda perlu login untuk dapat menawar produk'))
             dispatch(setSuccessAuth(false))
             navigate('/login')
+            setTimeout(() => {
+                dispatch(setMessageAuth(''))
+            }, 1500);
         }
     }
 

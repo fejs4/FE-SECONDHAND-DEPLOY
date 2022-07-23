@@ -24,12 +24,18 @@ const Products = () => {
         dispatch(setMessageUser('Lengkapi profil untuk dapat menjual produk'))
         dispatch(setSuccessUser(false))
         navigate(`/info-user/${userProfile.id}`)
+        setTimeout(() => {
+          dispatch(setMessageUser(''))
+        }, 1500);
       }
 
     } else {
       dispatch(setMessageAuth('Anda perlu login untuk dapat menjual produk'))
       dispatch(setSuccessAuth(false))
       navigate('/login')
+      setTimeout(() => {
+        dispatch(setMessageAuth(''))
+      }, 1500);
     }
   }
 
