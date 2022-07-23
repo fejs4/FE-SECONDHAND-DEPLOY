@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { fetchTawarBuyer, postTawar, setMessage } from '../../../redux/tawar';
 import { setMessageUser, setSuccessUser } from '../../../redux/users';
 import { setMessageAuth, setSuccessAuth } from '../../../redux/auth';
+import { fetchNotif } from '../../../redux/notif';
 const style = {
     position: 'absolute',
     top: '50%',
@@ -39,7 +40,8 @@ const ModalBuyer = ({ data, open, handleClose, handlePost }) => {
                     }
                     try {
                         dispatch(postTawar(data)).then((data) => {
-                            data.payload.success && dispatch(fetchTawarBuyer())
+                            data.payload.success && dispatch(fetchTawarBuyer()) 
+                            dispatch(fetchNotif())
                             handlePost()
                             setTimeout(() => {
                                 dispatch(setMessage(''))

@@ -14,6 +14,7 @@ import { fetchProductDetail, publishProduct, setLoading } from '../../../redux/p
 import ModalBuyer from '../buyer/ModalBuyer'
 import { setMessage, setSuccess } from '../../../redux/tawar'
 import DetailProductLoading from '../../loading/DetailProductLoading'
+import { fetchNotif } from '../../../redux/notif'
 
 const ProductDetails = ({ status }) => {
   const { id } = useParams()
@@ -69,7 +70,7 @@ const ProductDetails = ({ status }) => {
   const handlePublish = () => {
     if (dataUser.id === detailProduct.user.id) {
       if (data.publish === false) {
-        dispatch(publishProduct(id))
+        dispatch(publishProduct(id)).then(res => res.payload.success && dispatch(fetchNotif()))
         setTimeout(() => {
           navigate('/daftar-jual')
         }, 1500);

@@ -1,13 +1,14 @@
 import React from "react";
 import ArrowBackSharpIcon from "@mui/icons-material/ArrowBackSharp";
 import Toolbar from "@mui/material/Toolbar";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteWishlist, fetchWishlist } from "../../redux/wishlist";
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
-const Wishlist = ({ wishlist,data, setWishlist, handleChange, handleOpen, setSuccess }) => {
+const Wishlist = ({ wishlist, data, setWishlist, handleChange, handleOpen, setSuccess }) => {
   const dispatch = useDispatch();
   const formatter = new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -30,11 +31,10 @@ const Wishlist = ({ wishlist,data, setWishlist, handleChange, handleOpen, setSuc
     const date = new Date(datenow)
     return (date.getDate() + " " + months[date.getMonth()] + ", " + addZero(date.getHours()) + ":" + addZero(date.getMinutes()))
   }
-
+  
   React.useEffect(() => {
     dispatch(fetchWishlist());
   }, [dispatch]);
-
   return (
     <Box width={{ md: "70%", xs: "100%" }} mx={"auto"} mt={3}>
       <Toolbar position="relative">
@@ -55,9 +55,9 @@ const Wishlist = ({ wishlist,data, setWishlist, handleChange, handleOpen, setSuc
           sx={{ left: 0, right: 0, top: 0 }}
         >
           {Object.keys(wishlistAmbil).length !== 0
-            ? wishlistAmbil.map((res,index) => {
+            ? wishlistAmbil.map((res, index) => {
               return (
-                
+
                 <Box
                   component={"div"}
                   rowGap={2}
@@ -65,33 +65,45 @@ const Wishlist = ({ wishlist,data, setWishlist, handleChange, handleOpen, setSuc
                   display={"flex"}
                   mt={2}
                   sx={{
-                    boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.15)",
+                    boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.3)",
                     borderRadius: "16px",
                     position: 'relative',
-                    width:'100%'
+                    width: '100%'
                   }}
                 >
-                  <Typography variant="caption" sx={{ padding: .5 ,display: res.product.isSold?'block' : 'none', color: 'white', background: 'grey', fontSize: '.8em', position: 'absolute', borderTopLeftRadius:'16px' }}>
+                  <Typography variant="caption" sx={{ padding: .5, display: res.product.isSold ? 'block' : 'none', color: 'white', background: 'grey', fontSize: '.8em', position: 'absolute', borderTopLeftRadius: '16px' }}>
                     Terjual
                   </Typography>
                   <Box p={2} width={'100%'}>
                     <Grid container my={1} p={1}>
                       <Grid
                         item
-                        xs={4}
-                        md={3}
+                        xs={1}
+                        md={1}
                         display={"flex"}
                         textAlign={"center"}
                         alignItems={"center"}
                       >
+                        <IconButton onClick={() => handleDelete(res.id)}>
+                            <DeleteOutlineOutlinedIcon sx={{ color: 'red' }} />
+                        </IconButton>
+                      </Grid>
+                      <Grid
+                        item
+                        xs={4}
+                        md={4}
+                        display={"flex"}
+                        textAlign={"center"}
+                        alignItems={"center"}
+                        justifyContent={'center'}
+                      >
                         <Box
                           component={"img"}
-
                           src={res.product.images ? `https://be-kel1.herokuapp.com/public/images/${res.product.images[0]}` : ''}
-                          sx={{ height: "75px", width: "90px", borderRadius: "16px", objectFit: 'contain' }}
+                          sx={{ height: "auto", maxHeight:"75px", width: "90px", borderRadius: "16px", objectFit: 'contain', textAlign:'center' }}
                         />
                       </Grid>
-                      <Grid item xs={5} md={5}>
+                      <Grid item xs={4} md={3}>
                         <Typography
                           variant="subtitle1"
                           fontWeight={550}
@@ -109,7 +121,7 @@ const Wishlist = ({ wishlist,data, setWishlist, handleChange, handleOpen, setSuc
                           {res.product.price ? formatter.format(res.product.price) : ''}
                         </Typography>
                       </Grid>
-                      <Grid item xs={3} md={4} textAlign="end">
+                      <Grid item xs={3} md={4} textAlign="center" display={'flex'} flexDirection={'column'}>
                         <Typography
                           variant="caption"
                           color="text.secondary"
@@ -118,28 +130,14 @@ const Wishlist = ({ wishlist,data, setWishlist, handleChange, handleOpen, setSuc
                         >
                           {res.createdAt ? toDate(res.createdAt) : ''}
                         </Typography>
-                      </Grid>
-                      <Grid item xs={12} display={"flex"} gap={3} mt={3}>
-                        <Button
-                          variant="outlined"
-                          color="primary"
-                          onClick={() => handleDelete(res.id)}
-                          sx={{
-                            width: "100%",
-                            height: "40px",
-                            borderRadius: "25px",
-                          }}
-                        >
-                          Hapus
-                        </Button>
-                        <Link to={`/detail-product-buyer/${res.productId ? res.productId : ''}`} style={{ width: '100%', textDecoration: 'none' }}>
+                        <Link to={`/detail-product-buyer/${res.productId ? res.productId : ''}`} style={{ textDecoration: 'none' }}>
                           <Button
                             variant="contained"
                             color="primary"
                             sx={{
-                              width: "100%",
-                              height: "40px",
+                              height: "25px",
                               borderRadius: "25px",
+                              fontSize:{ md: ".8rem", xs: ".4rem" }
                             }}
                           >
                             Lihat Produk
@@ -151,7 +149,7 @@ const Wishlist = ({ wishlist,data, setWishlist, handleChange, handleOpen, setSuc
                 </Box>
               );
             })
-            
+
             :
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
               <Typography>

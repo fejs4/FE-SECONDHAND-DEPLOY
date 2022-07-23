@@ -11,6 +11,7 @@ import { fetchProductDetail, postProducts, updateProduct } from '../../../redux/
 import { formProductValidation } from '../../../validator/validator';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import { fetchNotif } from '../../../redux/notif';
 
 const thumb = {
     display: 'flex',
@@ -94,6 +95,7 @@ const FormProduct = () => {
                     dispatch(postProducts(product)).then(
                         (res) => {
                             if (res.payload.success) {
+                                dispatch(fetchNotif())
                                 setTimeout(() => {
                                     navigate(`/daftar-jual`)
                                 }, 2000);
@@ -143,6 +145,7 @@ const FormProduct = () => {
                     product.append("publish", false)
                     dispatch(postProducts(product)).then((data) => {
                         if (data.payload.success) {
+                            dispatch(fetchNotif())
                             setTimeout(() => {
                                 navigate(`/detail-product-seller/${data.payload.data.product.productId}`)
                             }, 2000);

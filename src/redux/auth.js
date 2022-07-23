@@ -71,7 +71,8 @@ const authSlice = createSlice({
         },
         [authRegister.rejected]: (state, action) => {
             return { ...state, error: action.error, success:action.payload.success }
-        }
+        },
+
     }
 })
 

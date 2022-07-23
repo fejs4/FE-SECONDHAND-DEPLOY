@@ -57,7 +57,7 @@ const ProdukTerjual = ({ setSuccess }) => {
                           height="140"
                           image={`https://be-kel1.herokuapp.com/public/images/${item.images[0]}`}
                           alt="green iguana"
-                          sx={{ objectFit: { md: 'cover', sm: 'cover', xs: 'contain' } }}
+                          sx={{ objectFit: 'contain' }}
                         />
                         <CardContent>
                           <Typography gutterBottom variant="h6" component="div" sx={{ fontSize: { xs: '1.1em', md: '1.5em' }, maxWidth:'200px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}>

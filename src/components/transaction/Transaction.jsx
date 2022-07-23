@@ -1,9 +1,8 @@
-import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Divider, Grid, Toolbar, Typography } from '@mui/material'
+import { Box, Button, Divider, Grid, Toolbar, Typography } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ArrowBackSharpIcon from "@mui/icons-material/ArrowBackSharp";
 import { useDispatch, useSelector } from 'react-redux';
-import CardLoading from '../loading/CardLoading';
 import { fetchTransaksiBuyer } from '../../redux/transaksi';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 
@@ -28,6 +27,7 @@ const Transaction = () => {
         dispatch(fetchTransaksiBuyer())
     }, []);
 
+    console.log(transactionLog)
     return (
         <>
             <Box width={{ md: "70%", xs: "100%" }} mx={"auto"} mt={3}>
@@ -97,8 +97,8 @@ const Transaction = () => {
                                                             </Typography>
                                                         </Box>
                                                     </Box>
-                                                    <Box sx={{ background: res.status == 'accepted' ? '#cff69b' : 'red', fontWeight: 'bold', py: .5, px: 1, borderRadius: '8px', color: res.status == 'accepted' ? '#467411' : 'red' }}>
-                                                        {res.status == 'accepted' ? 'Selesai' : 'Ditolak'}
+                                                    <Box sx={{ background: res.status === 'accepted' ? '#cff69b' : 'red', fontWeight: 'bold', py: .5, px: 1, borderRadius: '8px', color: res.status === 'accepted' ? '#467411' : 'red' }}>
+                                                        {res.status === 'accepted' ? 'Selesai' : 'Ditolak'}
                                                     </Box>
                                                 </Grid>
                                                 <Grid item xs={12} md={12}>
@@ -107,8 +107,8 @@ const Transaction = () => {
                                                 <Grid
                                                     item
                                                     xs={4}
-                                                    md={6}
-                                                    xl={5}
+                                                    md={4}
+                                                    xl={4}
                                                     display={"flex"}
                                                     textAlign={"center"}
                                                     alignItems={"center"}
@@ -116,15 +116,16 @@ const Transaction = () => {
                                                     <Box
                                                         component={"img"}
                                                         src={res.product.images ? `https://be-kel1.herokuapp.com/public/images/${res.product.images[0]}` : ''}
-                                                        sx={{ height: "auto", width: { xs: "100px", md: '200px' }, borderRadius: "16px", objectFit: 'contain' }}
+                                                        sx={{ height: "auto", width: { xs: "100px", md: '120px', xl: '150px' }, borderRadius: "16px", objectFit: 'contain' }}
                                                     />
                                                 </Grid>
-                                                <Grid item xs={8} md={6} xl={7}>
+                                                <Grid item xs={5} md={6} xl={5}>
                                                     <Typography
                                                         variant="subtitle1"
                                                         fontWeight={550}
                                                         my={0}
-                                                        fontSize={{ md: "1rem", xs: ".8rem" }}
+                                                        fontSize={{ xl: "1rem",md: ".9rem", xs: ".7rem" }}
+                                                        sx={{ maxWidth:'200px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}
                                                     >
                                                         {res.product.name}
                                                     </Typography>
@@ -132,7 +133,8 @@ const Transaction = () => {
                                                         variant="subtitle1"
                                                         fontWeight={550}
                                                         my={0}
-                                                        fontSize={{ md: "1rem", xs: ".8rem" }}
+                                                        sx={{ maxWidth:'200px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}
+                                                        fontSize={{ xl: "1rem",md: ".9rem", xs: ".7rem" }}
                                                     >
                                                         <s>{formatter.format(res.product.price)}</s>
                                                     </Typography>
@@ -140,24 +142,24 @@ const Transaction = () => {
                                                         variant="subtitle1"
                                                         fontWeight={550}
                                                         my={0}
-                                                        fontSize={{ md: "1rem", xs: ".8rem" }}
+                                                        sx={{ maxWidth:'200px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}
+                                                        fontSize={{ xl: "1rem",md: ".9rem", xs: ".7rem" }}
                                                     >
                                                         Ditawar {formatter.format(res.price)}
                                                     </Typography>
                                                 </Grid>
-                                                <Grid item xs={12} gap={3} mt={3}>
-                                                    <Link to={'/'} style={{ width: '100%', textDecoration: 'none',display:"flex", justifyContent:'flex-end' }}>
+                                                <Grid item xs={3} md={2} xl={3} gap={3}>
+                                                    <Link to={`/detail-product-buyer/${res.product.id}`} style={{ width: '100%', textDecoration: 'none',display:"flex", justifyContent:'flex-end' }}>
                                                         <Button
                                                             variant="contained"
                                                             color="primary"
                                                             sx={{
-                                                                width: { md: "40%", xs: "50%" },
-                                                                height: "40px",
+                                                                height: {xl:"30px", md:"25px", xs:"20px" },
                                                                 borderRadius: "25px",
-                                                                fontSize: { md: 'unset', xs: '12px' }
+                                                                fontSize: { md: '7px', xs: '6px', xl:'.9rem' }
                                                             }}
                                                         >
-                                                            Lihat Produk Lain
+                                                            Lihat Detail
                                                         </Button>
                                                     </Link>
                                                 </Grid>
