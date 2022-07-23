@@ -60,13 +60,13 @@ const ProdukTerjual = ({ setSuccess }) => {
                           sx={{ objectFit: { md: 'cover', sm: 'cover', xs: 'contain' } }}
                         />
                         <CardContent>
-                          <Typography gutterBottom variant="h6" component="div" sx={{ fontSize: { xs: '1.1em', md: '1.5em' } }}>
+                          <Typography gutterBottom variant="h6" component="div" sx={{ fontSize: { xs: '1.1em', md: '1.5em' }, maxWidth:'200px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}>
                             {item.name}
                           </Typography>
                           <Typography variant="body2" color="text.secondary" mb={2}>
                             {item.category}
                           </Typography>
-                          <Typography gutterBottom variant="h6" component="div" sx={{ fontSize: { xs: '1.1em', md: '1.5em' } }}>
+                          <Typography gutterBottom variant="h6" component="div" sx={{ fontSize: { xs: '1.1em', md: '1.5em' }, maxWidth:'200px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' }}>
                             {formatter.format(item.price)}
                           </Typography>
                         </CardContent>

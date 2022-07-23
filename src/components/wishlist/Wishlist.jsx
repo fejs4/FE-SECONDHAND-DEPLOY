@@ -78,7 +78,7 @@ const Wishlist = ({ wishlist,data, setWishlist, handleChange, handleOpen, setSuc
                     <Grid container my={1} p={1}>
                       <Grid
                         item
-                        xs={3}
+                        xs={4}
                         md={3}
                         display={"flex"}
                         textAlign={"center"}
@@ -91,7 +91,7 @@ const Wishlist = ({ wishlist,data, setWishlist, handleChange, handleOpen, setSuc
                           sx={{ height: "75px", width: "90px", borderRadius: "16px", objectFit: 'contain' }}
                         />
                       </Grid>
-                      <Grid item xs={6} md={5}>
+                      <Grid item xs={5} md={5}>
                         <Typography
                           variant="subtitle1"
                           fontWeight={550}

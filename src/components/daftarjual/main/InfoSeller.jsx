@@ -1,4 +1,4 @@
-import { Alert, Avatar, Box, Button, Grid, IconButton, Stack, Typography } from '@mui/material'
+import { Alert, Avatar, Box, Button, Grid, IconButton, Skeleton, Stack, Typography } from '@mui/material'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -33,7 +33,7 @@ const InfoSeller = ({success, setSuccess}) => {
       <Grid container my={1} py={1} sx={{ pr: 2, boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.25)', borderRadius: '16px' }}>
         <Grid item xs={3} md={1} textAlign="center">
           <IconButton >
-            <Avatar alt="" src={user? `https://be-kel1.herokuapp.com/public/profile/${user.image}` : "/static/images/avatar/2.jpg"} />
+            <Avatar alt="" src={user? `https://be-kel1.herokuapp.com/public/profile/${user.image}` : <Skeleton variant="circular" width={40} height={40} />} />
           </IconButton>
         </Grid>
         <Grid item xs my={'auto'}>

@@ -28,7 +28,6 @@ const Transaction = () => {
         dispatch(fetchTransaksiBuyer())
     }, []);
 
-    console.log(transactionLog);
     return (
         <>
             <Box width={{ md: "70%", xs: "100%" }} mx={"auto"} mt={3}>
@@ -147,7 +146,7 @@ const Transaction = () => {
                                                     </Typography>
                                                 </Grid>
                                                 <Grid item xs={12} gap={3} mt={3}>
-                                                    <Link to={'/'} style={{ width: '100%', textDecoration: 'none',display:"flex", justifyContent:'center' }}>
+                                                    <Link to={'/'} style={{ width: '100%', textDecoration: 'none',display:"flex", justifyContent:'flex-end' }}>
                                                         <Button
                                                             variant="contained"
                                                             color="primary"

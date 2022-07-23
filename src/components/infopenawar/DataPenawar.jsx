@@ -105,6 +105,7 @@ const DataPenawar = () => {
     }, [dispatch])
 
     React.useEffect(() => {
+        dispatch(setLoading(true))
         dispatch(fetchDetailTawar(id))
         setTimeout(() => {
             dispatch(setLoading(false))

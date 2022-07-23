@@ -17,10 +17,11 @@ export const registerValidation = (values,setError) =>{
 
 export const formUserValidation = (data,files,fileRejections, setError) =>{
     const error = []
+    const patternPhone = /62[0-9]+$/gm
     error.name = data.nama.length !== 0 ? '' : 'name is not valid'
     error.address = data.alamat.length !== 0 ? '' : 'address is not valid'
-    error.phone = data.nohp.length !== 0 && typeof Number(data.nohp) === 'number' ? '' : 'number phone is not valid'
-    error.photo = fileRejections.length > 4 ? 'image cannot more than 4 files' : files.length === 0 ? 'image cannot be null' : ''
+    error.phone = patternPhone.test(data.nohp) ? '' : 'number phone is not valid'
+    error.photo = fileRejections.length > 4 ? 'image cannot more than 4 files' : files.length === 0 ? 'image is not valid' : ''
     setError({...error})
 }
 
@@ -29,6 +30,6 @@ export const formProductValidation = (data,files,fileRejections, setError) =>{
     error.name = data.nama.length !== 0 ? '' : 'name cannot be null'
     error.price = data.harga !== 0 ? '' : 'price cannot be null'
     error.description = data.deskripsi.length !== 0 ? '' : 'description cannot be null'
-    error.photo = fileRejections.length > 4 ? 'image cannot more than 4 files' : files.length === 0 ? 'image cannot be null' : ''
+    error.photo = fileRejections.length > 4 ? 'image cannot more than 4 files' : files.length === 0 ? 'image is not valid' : ''
     setError({...error})
 }

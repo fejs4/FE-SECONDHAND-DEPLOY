@@ -39,13 +39,13 @@ const ItemCard = ({ clicked, page }) => {
                                                     sx={{ objectFit: { md: 'contain', sm: 'cover', xs: 'contain' } }}
                                                 />
                                                 <CardContent>
-                                                    <Typography gutterBottom variant="h6" component="div" sx={{ fontSize: { xs: '1.1em', md: '1.5em' } }}>
+                                                    <Typography gutterBottom variant="h6" component="div" sx={{ fontSize: { xs: '1.1em', md: '1.5em', maxWidth:'200px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' } }}>
                                                         {item.name ? item.name : ''}
                                                     </Typography>
                                                     <Typography variant="body2" color="text.secondary" mb={1} sx={{ fontSize: { xs: '0.9em', md: '1.2em' } }}>
                                                         {item.category ? item.category : ''}
                                                     </Typography>
-                                                    <Typography gutterBottom variant="h6" component="div" sx={{ fontSize: { xs: '.8em', md: '1.3em' } }}>
+                                                    <Typography gutterBottom variant="h6" component="div" sx={{ fontSize: { xs: '.8em', md: '1.3em', maxWidth:'200px',textOverflow:'ellipsis', whiteSpace:'nowrap', overflow:'hidden' } }}>
                                                         {item.price ? formatter.format(item.price) : ''}
                                                     </Typography>
                                                 </CardContent>

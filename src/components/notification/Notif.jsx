@@ -93,28 +93,28 @@ const Notif = () => {
                                     backgroundColor: '#eee',
                                 }
                             }} >
-                                <Grid item xs={2} textAlign="center">
+                                <Grid item xs={2} md={3} textAlign="center">
                                     <IconButton >
                                         <Avatar alt="" src={`https://be-kel1.herokuapp.com/public/images/${item.product.images[0]}`} />
                                     </IconButton>
                                 </Grid>
-                                <Grid item xs={7}>
+                                <Grid item xs={7} md={6}>
                                     <Typography variant="caption" color='text.secondary' component="h2" >
                                         Penawaran Produk
                                     </Typography>
-                                    <Typography variant='subtitle1' fontWeight={550} my={0} >
+                                    <Typography variant='subtitle1' fontWeight={550} my={0} sx={{ fontSize:{md:'unset', xs:'.8rem'} }}>
                                         {item.product.name}
                                     </Typography>
-                                    <Typography variant='subtitle1' fontWeight={550} my={0} >
+                                    <Typography variant='subtitle1' fontWeight={550} my={0} sx={{ fontSize:{md:'unset', xs:'.8rem'} }}>
                                         <s>{formatter.format(item.product.price)}</s>
                                     </Typography>
-                                    <Typography variant='subtitle1' fontWeight={550} my={0} >
+                                    <Typography variant='subtitle1' fontWeight={550} my={0} sx={{ fontSize:{md:'unset', xs:'.8rem'} }}>
                                         Berhasil Ditawar {formatter.format(item.tawar.price)}
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={3} textAlign="end" >
+                                <Grid item xs={3} md={3} textAlign="end" >
                                     <Box justifyContent={'flex-end'} alignItems={'center'} display={'flex'} sx={{ marginTop: '-8px' }}>
-                                        <Typography variant="caption" color='text.secondary' component="h2" >
+                                        <Typography variant="caption" color='text.secondary' component="h2" sx={{ fontSize:{md:'unset', xs:'.6rem'} }}>
                                             {toDate(item.createdAt)}
                                         </Typography>
                                         <IconButton onClick={(e) => handleDelete(e, item.id)}>
