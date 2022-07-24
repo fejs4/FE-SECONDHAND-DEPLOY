@@ -101,7 +101,7 @@ const Transaction = () => {
                                                                 </Typography>
                                                             </Box>
                                                         </Box>
-                                                        <Box sx={{ background: res.status === 'accepted' ? '#cff69b' : '#FF6666', fontWeight: 'bold', py: .5, px: 1, borderRadius: '8px', color: res.status === 'accepted' ? '#467411' : 'white' }}>
+                                                        <Box sx={{ background: res.status === 'accepted' ? '#cff69b' : '#F22613', fontWeight: 'bold', py: .5, px: 1, borderRadius: '8px', color: res.status === 'accepted' ? '#467411' : 'white' }}>
                                                             {res.status === 'accepted' ? 'Selesai' : 'Ditolak'}
                                                         </Box>
                                                     </Grid>
