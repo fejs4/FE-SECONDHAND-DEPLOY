@@ -26,13 +26,17 @@ const ProductInterest = ({data,handleOpen}) => {
                 const data =  {
                     product_id : id
                 }
-                dispatch(postWishlist(data))
+                const detailWishlist = wishlistAmbil.filter(item => item.productId === Number(id))
+                const dataId = detailWishlist[0].id
+                if (!dataId) {
+                    dispatch(postWishlist(data)).then(res => res.payload.success && dispatch(fetchWishlist()))
+                }
             }else{
                 setLove(false)
                 const detailWishlist = wishlistAmbil.filter(item => item.productId === Number(id))
                 const dataId = detailWishlist[0].id
                 if (dataId) {
-                    dispatch(deleteWishlist(dataId))
+                    dispatch(deleteWishlist(dataId)).then(res => res.payload.success && dispatch(fetchWishlist()))
                 }
             }
         }
