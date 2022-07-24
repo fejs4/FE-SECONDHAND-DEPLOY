@@ -4,7 +4,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { deleteWishlist, fetchWishlist, postWishlist } from '../../../redux/wishlist';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
-import { fetchTawarBuyer } from '../../../redux/tawar';
+import { fetchTawar } from '../../../redux/tawar';
 
 const ProductInterest = ({data,handleOpen}) => {
     // Wishlist
@@ -13,11 +13,14 @@ const ProductInterest = ({data,handleOpen}) => {
     const { id } = useParams()
     const dispatch = useDispatch()
     const wishlistAmbil = useSelector(state => state.wishlist.wishlist)
+
     const getId = Object.keys(wishlistAmbil).length !== 0 && wishlistAmbil.map((data) => data.productId)
     const onWishlist = getId ? getId.includes(Number(id)) : ''
 
     const dataUser = useSelector(state => state.auth.userProfile)
     const detailProduct = useSelector(state => state.product.detailProduct)
+
+    const detailWishlist = Object.keys(wishlistAmbil).length !== 0 && wishlistAmbil.filter(item => item.productId === Number(id))
 
     const handleWishlist = async () => {
         if (Object.keys(dataUser).length !== 0 && dataUser.id !== detailProduct.user.id) {
@@ -26,9 +29,7 @@ const ProductInterest = ({data,handleOpen}) => {
                 const data =  {
                     product_id : id
                 }
-                const detailWishlist = wishlistAmbil.filter(item => item.productId === Number(id))
-                const dataId = detailWishlist[0].id
-                if (!dataId) {
+                if (Object.keys(detailWishlist).length === 0) {
                     dispatch(postWishlist(data)).then(res => res.payload.success && dispatch(fetchWishlist()))
                 }
             }else{
@@ -44,10 +45,11 @@ const ProductInterest = ({data,handleOpen}) => {
 
     // Tawar
     const dataTawar = useSelector(state=>state.tawar.tawar)
-    const tawarID = Object.keys(dataTawar).length !== 0 ? dataTawar.filter(item => item.productId === Number(id)) : ''
+    const tawarID = Object.keys(dataTawar).length !== 0 ? dataTawar.filter(item => item.productId === Number(id) && item.userId === dataUser.id) : ''
+    console.log(dataTawar)
 
     React.useEffect(() => {
-        dispatch(fetchTawarBuyer())
+        dispatch(fetchTawar())
     },[dispatch])
 
     React.useEffect(()=>{
@@ -78,7 +80,7 @@ const ProductInterest = ({data,handleOpen}) => {
                 </Typography>
                 
                 <Button color='primary' variant='contained' disabled={tawarID.length !== 0 || data.isSold} onClick={handleOpen} sx={{ borderRadius: '16px', height: 'auto', minHeight:'48px', display: { md: 'block', xs: 'none' } }}>
-                    {Object.keys(tawarID).length !== 0 ? data.isSold ? 'Produk telah terjual' : 'Menunggu respon penjual' : 'Saya tertarik ingin nego'}
+                    {Object.keys(tawarID).length === 0 ?  'Saya tertarik ingin nego' : data.isSold ? 'Produk telah terjual' : 'Menunggu respon penjual'}
                 </Button>
             </Box>
         </>

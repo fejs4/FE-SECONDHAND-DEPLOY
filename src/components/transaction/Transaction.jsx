@@ -101,7 +101,7 @@ const Transaction = () => {
                                                                 </Typography>
                                                             </Box>
                                                         </Box>
-                                                        <Box sx={{ background: res.status === 'accepted' ? '#cff69b' : 'red', fontWeight: 'bold', py: .5, px: 1, borderRadius: '8px', color: res.status === 'accepted' ? '#467411' : 'red' }}>
+                                                        <Box sx={{ background: res.status === 'accepted' ? '#cff69b' : 'red', fontWeight: 'bold', py: .5, px: 1, borderRadius: '8px', color: res.status === 'accepted' ? '#467411' : 'white' }}>
                                                             {res.status === 'accepted' ? 'Selesai' : 'Ditolak'}
                                                         </Box>
                                                     </Grid>
@@ -120,10 +120,10 @@ const Transaction = () => {
                                                         <Box
                                                             component={"img"}
                                                             src={res.product.images ? `https://be-kel1.herokuapp.com/public/images/${res.product.images[0]}` : ''}
-                                                            sx={{ height: { xs: "100px", md: '120px', xl: '150px' }, width: 'auto', borderRadius: "16px", objectFit: 'contain' }}
+                                                            sx={{ height: { xs: "100px", md: '120px', xl: '150px' }, width: 'auto', maxWidth:{md:'150px', xs:'120px'}, borderRadius: "16px", objectFit: 'contain' }}
                                                         />
                                                     </Grid>
-                                                    <Grid item xs={5} md={6} xl={5}>
+                                                    <Grid item xs={5} md={5} xl={5}>
                                                         <Typography
                                                             variant="subtitle1"
                                                             fontWeight={550}
@@ -152,15 +152,15 @@ const Transaction = () => {
                                                             Ditawar {formatter.format(res.price)}
                                                         </Typography>
                                                     </Grid>
-                                                    <Grid item xs={3} md={2} xl={3}>
+                                                    <Grid item xs={3} md={3} xl={3}>
                                                         <Link to={`/detail-product-buyer/${res.product.id}`} style={{ width: '100%', textDecoration: 'none', display: "flex", justifyContent: 'flex-end' }}>
                                                             <Button
                                                                 variant="contained"
                                                                 color="primary"
                                                                 sx={{
                                                                     height: { xl: "30px", md: "25px", xs: "20px" },
-                                                                    borderRadius: "25px",
-                                                                    fontSize: { md: '7px', xs: '6px', xl: '.9rem' }
+                                                                    borderRadius: "8px",
+                                                                    fontSize: { md: '.63rem', xs: '.5rem', xl: '.9rem' }
                                                                 }}
                                                             >
                                                                 Lihat Detail

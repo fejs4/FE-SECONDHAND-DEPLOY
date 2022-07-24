@@ -20,6 +20,9 @@ const Wishlist = ({ wishlist, data, setWishlist, handleChange, handleOpen, setSu
 
   const handleDelete = (id) => {
     dispatch(deleteWishlist(id)).then((res) => res.payload.success && dispatch(fetchWishlist()))
+    setTimeout(() => {
+      dispatch(setLoading(false))
+    }, 1500);
   }
 
   function addZero(i) {
@@ -40,7 +43,8 @@ const Wishlist = ({ wishlist, data, setWishlist, handleChange, handleOpen, setSu
     setTimeout(() => {
       dispatch(setLoading(false))
     }, 1500);
-  }, [dispatch]);
+  }, [dispatch])
+  
   return (
     <Box width={{ md: "70%", xs: "100%" }} mx={"auto"} mt={3}>
       <Toolbar position="relative">
@@ -130,7 +134,7 @@ const Wishlist = ({ wishlist, data, setWishlist, handleChange, handleOpen, setSu
                           {res.product.price ? formatter.format(res.product.price) : ''}
                         </Typography>
                       </Grid>
-                      <Grid item xs={3} md={4} textAlign="center" display={'flex'} flexDirection={'column'}>
+                      <Grid item xs={3} md={4} textAlign="center" display={'flex'} flexDirection={'column'} gap={1}> 
                         <Typography
                           variant="caption"
                           color="text.secondary"

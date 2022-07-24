@@ -5,7 +5,7 @@ export const fetchTawar = createAsyncThunk(
     'tawar/fetchTawar',
     async () => {
         const token = localStorage.getItem('token')
-        const response = await axios.get(`https://be-kel1.herokuapp.com/tawar/`,
+        const response = await axios.get(`https://be-kel1.herokuapp.com/tawar`,
         {headers: {
             Authorization: token,
         }})
@@ -120,6 +120,17 @@ const tawarSlice = createSlice({
             return { ...state, tawar: action.payload.data }
         },
         [fetchTawarBuyer.rejected]: (state, action) => {
+            return { ...state, error: action.error }
+        },
+
+        // Fetching Tawar all
+        [fetchTawar.pending]: (state, action) => {
+            return { ...state, error: null, }
+        },
+        [fetchTawar.fulfilled]: (state, action) => {
+            return { ...state, tawar: action.payload.data }
+        },
+        [fetchTawar.rejected]: (state, action) => {
             return { ...state, error: action.error }
         },
 
