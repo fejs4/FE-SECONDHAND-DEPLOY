@@ -6,6 +6,7 @@ import { deleteTawar, fetchTawarSeller, setLoading, setMessage } from '../../../
 import { Link } from 'react-router-dom';
 import TawarLoading from '../../loading/TawarLoading';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import { fetchNotif } from '../../redux/notif';
 
 const ProdukDiminati = ({setSuccess}) => {
   const formatter = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" })
@@ -29,6 +30,7 @@ const ProdukDiminati = ({setSuccess}) => {
     dispatch(deleteTawar(id)).then((data) =>{
       if (data.payload.success) {
         dispatch(fetchTawarSeller())
+        dispatch(fetchNotif())
         setSuccess(true)
         setTimeout(() => {
           dispatch(setMessage(''))
